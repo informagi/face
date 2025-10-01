@@ -4,7 +4,6 @@ Our **CRSArena-Eval dataset** contains a collection of human-annotated conversat
 
 ## Statistics
 
-### General Statistics
 | Statistic                     | Value  |
 |-------------------------------|--------|
 | # Conversations                 | 467    |
@@ -14,9 +13,12 @@ Our **CRSArena-Eval dataset** contains a collection of human-annotated conversat
 | Avg. words per system utterance | 15.18  |
 | # Turn-level aspects            | 2      |
 | # Dialogue-level aspects        | 5      |
+| # Final labels (after aggregation) | 6,805  |
 
 
-### Final Label Statistics
+
+<details>
+<summary>Details: Final Label Statistics</summary>
 
 Here, we provide the statistics of the final human labels (after aggregation).
 
@@ -31,10 +33,15 @@ Here, we provide the statistics of the final human labels (after aggregation).
 | Interestingness | Turn-level             | 2,235         |
 | **Total**   |                        | **6,805**     |
 
+</details>
 
+
+<details>
+<summary>Details: CRS Models</summary>
 
 **CRSs**: CRSArena-Eval includes 9 CRSs: `chatgpt_redial`, `barcor_redial`, `unicrs_redial`, `crb-crs_redial`, `kbrd_redial`, `chatgpt_opendialkg`, `barcor_opendialkg`, `unicrs_opendialkg`, and `kbrd_opendialkg`. The CRS model is shown in `conv_id`. For the details of these CRSs, please refer to [Section 3 of our paper](https://arxiv.org/abs/2506.00314) or [Bernard et al. [1]](https://dl.acm.org/doi/10.1145/3701551.3704120).
 
+</details>
 
 
 ## Data Structure
