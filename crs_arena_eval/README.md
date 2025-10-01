@@ -41,17 +41,17 @@ Here, we provide the statistics of the final human labels (after aggregation).
 
 The dataset is a single JSON file containing an list of conversation entries. Each object represents one complete dialogue and its associated annotations.
 
-```json
+```python
 [
-  { // Conversation 1
+  { # Conversation 1
     "conv_id": "...",
     "dialogue": [
-      { "role": "USER", "utterance": "..." }, // User turn
-      { "role": "ASST", "utterance": "...", "turn_level_aggregated": {} }, // Only assistant turns have annotations
-      // ... more turns
+      { "role": "USER", "utterance": "..." }, # User turn
+      { "role": "ASST", "utterance": "...", "turn_level_aggregated": {} }, # Only assistant turns have annotations
+      # ... more turns
     ],
     "dial_level_aggregated": { ... }
-  } // ... more conversations
+  } # ... more conversations
 ]
 ```
 
@@ -89,13 +89,13 @@ The `dial_level_aggregated` structure provides dialogue-level scores based on th
 
 The following snippet illustrates the structure of a single conversation object.
 
-```json
+```python
 [
   {
-    // A unique identifier for the entire conversation.
+    # A unique identifier for the entire conversation.
     "conv_id": "barcor_redial_06c2c40a-921b-414a-85cc-2501469605cd",
-    
-    // An list containing the sequence of conversational turns.
+
+    # An list containing the sequence of conversational turns.
     "dialogue": [
       {
         "turn_ind": 0,
@@ -106,17 +106,17 @@ The following snippet illustrates the structure of a single conversation object.
         "turn_ind": 1,
         "role": "ASST",
         "utterance": "Have you seen The Hangover (2009)?",
-        
-        // Turn-level annotations evaluating the assistant's specific response.
+
+        # Turn-level annotations evaluating the assistant's specific response.
         "turn_level_aggregated": {
           "relevance": 2,
           "interestingness": 2
         }
       },
-      // [...] The rest of the turns are omitted for brevity.
+      # [...] The rest of the turns are omitted for brevity.
     ],
-    
-    // Dialogue-level annotations evaluating the assistant's overall performance.
+
+    # Dialogue-level annotations evaluating the assistant's overall performance.
     "dial_level_aggregated": {
       "understanding": 0,
       "task_completion": 0,
