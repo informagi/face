@@ -11,6 +11,7 @@ Our **CRSArena-Eval dataset** contains a collection of human-annotated conversat
 | Avg. utterances per conversation | 9.58   |
 | Avg. words per user utterance | 7.53   |
 | Avg. words per system utterance | 15.18  |
+| # CRSs                        | 9      |
 | # Turn-level aspects            | 2      |
 | # Dialogue-level aspects        | 5      |
 | # Final labels (after aggregation) | 6,805  |
