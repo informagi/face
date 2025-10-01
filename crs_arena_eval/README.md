@@ -113,7 +113,7 @@ The following snippet illustrates the structure of a single conversation object.
           "interestingness": 2
         }
       },
-      # [...] The rest of the turns are omitted for brevity.
+      # ... more turns
     ],
 
     # Dialogue-level annotations evaluating the assistant's overall performance.
@@ -125,6 +125,7 @@ The following snippet illustrates the structure of a single conversation object.
       "dialogue_overall": 1,
     }
   }
+  # ... more conversations
 ]
 ```
 
