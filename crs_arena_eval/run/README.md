@@ -33,3 +33,11 @@ The same format as CRSArena-Eval dataset, but with predicted scores instead of h
   }
 ]
 ```
+
+## Evaluation
+
+To evaluate the run file against the CRSArena-Eval dataset, use the provided evaluation script:
+
+```bash
+python evaluate.py --run_file path/to/run_file.json --data_file path/to/crs_arena_eval.json
+```
