@@ -46,6 +46,6 @@ python evaluate.py --run_file path/to/run_file.json --data_file path/to/crs_aren
 ## Easy-to-Use Meta-Evaluation Interface
 
 We provide an easy-to-use meta-evaluation interface to evaluate your evaluator against the CRSArena-Eval dataset.
-Visit: https://hideaki-j.github.io/crsarena-eval/
+Visit: https://informagus.nl/face/
 
 ![CRSArena-Eval demo](demo.gif)

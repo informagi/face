@@ -67,7 +67,7 @@ The [`crs_arena_eval/run/`](crs_arena_eval/run/) directory contains scripts and 
 ### CRSArena-Eval Interactive Meta-Evaluation Interface
 
 We provide an easy-to-use meta-evaluation interface to evaluate your evaluator against the CRSArena-Eval dataset.
-Visit: https://hideaki-j.github.io/crsarena-eval/
+Visit: https://informagus.nl/face/
 
 ![CRSArena-Eval demo](./crs_arena_eval/run/demo.gif)
 
