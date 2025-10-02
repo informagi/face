@@ -47,7 +47,7 @@ const chartDataCache = {
 };
 let comparisonChartInstance = null;
 const chartState = {
-    metric: 'spearman',
+    metric: 'pearson',
     dataset: 'redial',
     selections: {
         redial: { seriesA: 'uploaded', seriesB: null },
