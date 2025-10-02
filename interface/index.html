@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRSArena-Eval Interactive Meta-Evaluation Interface</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #f4f4f0;
+            min-height: 100vh;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* ArXiv-style header */
+        .header {
+            background: #b31b1b;
+            color: white;
+            padding: 15px 0;
+            border-bottom: 3px solid #8b0000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            font-weight: 600;
+            margin: 0;
+            letter-spacing: 0.8px;
+            color: #fff9f5;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+        }
+
+        .header .subtitle {
+            font-size: 1.05em;
+            opacity: 0.92;
+            margin-top: 6px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #ffe8e8;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            line-height: 1.5;
+        }
+
+        .header .subtitle a {
+            color: #fff5f5;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .header .subtitle a:hover {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            background: white;
+            border: 1px solid #d0d0d0;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 2em;
+            font-weight: normal;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            font-weight: normal;
+            color: #333;
+            margin: 30px 0 20px 0;
+            border-bottom: 2px solid #b31b1b;
+            padding-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 1em;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .upload-section {
+            background: #fafaf8;
+            border: 2px solid #d0d0d0;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            transition: all 0.2s ease;
+        }
+
+        .upload-section:hover {
+            border-color: #b31b1b;
+            background: #fff;
+        }
+
+        .upload-section.dragover {
+            border-color: #b31b1b;
+            background: #fff5f5;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .upload-btn {
+            background: #b31b1b;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: normal;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .upload-btn:hover {
+            background: #8b0000;
+        }
+
+        .upload-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #b31b1b;
+        }
+
+        .upload-text {
+            color: #555;
+            font-size: 1em;
+            margin-bottom: 20px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+            padding: 30px;
+            background: #fafaf8;
+            border: 1px solid #d0d0d0;
+        }
+
+        .spinner {
+            border: 3px solid #f0f0f0;
+            border-top: 3px solid #b31b1b;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 15px;
+            color: #555;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .error {
+            background: #ffe6e6;
+            border: 1px solid #d9534f;
+            color: #a94442;
+            padding: 15px;
+            margin: 20px 0;
+            display: none;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .success {
+            background: #dff0d8;
+            border: 1px solid #5cb85c;
+            color: #3c763d;
+            padding: 15px;
+            margin: 20px 0;
+            display: none;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .results {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .results h2 {
+            color: #333;
+            margin: 30px 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #b31b1b;
+        }
+
+        .charts-container {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .chart-wrapper {
+            flex: 1 1 460px;
+            min-width: 320px;
+            background: #fafaf8;
+            padding: 25px;
+            border: 1px solid #d0d0d0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .table-wrapper {
+            flex: 1 1 360px;
+            min-width: 320px;
+            background: #fafaf8;
+            padding: 25px;
+            border: 1px solid #d0d0d0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            gap: 16px;
+        }
+
+        .chart-header h3 {
+            margin: 0;
+            color: #333;
+            font-size: 1.2em;
+            font-weight: normal;
+            font-family: Georgia, serif;
+        }
+
+        .chart-select {
+            padding: 6px 10px;
+            border: 1px solid #d0d0d0;
+            background-color: white;
+            color: #333;
+            font-weight: normal;
+            cursor: pointer;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 0.95em;
+        }
+
+        .chart-select:hover {
+            border-color: #b31b1b;
+        }
+
+        .chart-control-group {
+            color: #555;
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 0.95em;
+        }
+
+        .global-chart-controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #fafaf8;
+            border: 1px solid #d0d0d0;
+        }
+
+        .chart-wrapper canvas {
+            max-height: 400px;
+        }
+
+        .table-wrapper h3 {
+            margin: 0 0 15px 0;
+            color: #b31b1b;
+            font-size: 1.15em;
+            font-weight: 600;
+            font-family: Georgia, serif;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+        }
+
+        .comparison-table thead th {
+            background: #f1e7e7;
+            color: #6b1a1a;
+            text-align: left;
+            padding: 10px 12px;
+            border-bottom: 2px solid #d8c8c8;
+        }
+
+        .comparison-table tbody td {
+            padding: 9px 12px;
+            border-bottom: 1px solid #e8dddd;
+            color: #333;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background: #f9f4f4;
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #f3e8e8;
+        }
+
+        .table-note {
+            margin-top: 12px;
+            font-size: 0.85em;
+            color: #6b1a1a;
+        }
+
+        .file-info {
+            background: #fafaf8;
+            padding: 15px;
+            border: 1px solid #d0d0d0;
+            margin-bottom: 20px;
+            display: none;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .file-info strong {
+            color: #b31b1b;
+        }
+
+        /* Footer in ArXiv style */
+        .footer {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .footer a {
+            color: #b31b1b;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <h1>CRSArena-Eval Interactive Meta-Evaluation Interface</h1>
+            <p class="subtitle">
+                CRSArena-Eval is proposed in
+                <a href="https://arxiv.org/abs/2506.00314" target="_blank" rel="noopener noreferrer">
+                    [Joko & Hasibi, 2025] FACE: A Fine-grained Reference Free Evaluator for Conversational Recommender Systems
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Upload Evaluation File</h2>
+        <p class="subtitle">Upload your run file to evaluate against CRS Arena benchmarks</p>
+
+        <div class="upload-section" id="uploadSection">
+            <div class="upload-icon">�</div>
+            <p class="upload-text">
+                Drag and drop your run file here or click to browse
+            </p>
+            <div class="file-input-wrapper">
+                <label for="fileInput" class="upload-btn">Choose File</label>
+                <input type="file" id="fileInput" accept=".json">
+            </div>
+        </div>
+
+        <div class="file-info" id="fileInfo"></div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p class="loading-text">Processing your file...</p>
+        </div>
+
+        <div class="error" id="error"></div>
+        <div class="success" id="success"></div>
+
+        <div class="results" id="results">
+            <h2>Evaluation Results</h2>
+            <div class="global-chart-controls">
+                <label class="chart-control-group" for="datasetSelect">
+                    Dataset:
+                    <select id="datasetSelect" class="chart-select">
+                        <option value="redial">CRSArena-Eval (ReDial)</option>
+                        <option value="opendialkg">CRSArena-Eval (OpenDialKG)</option>
+                    </select>
+                </label>
+                <label class="chart-control-group" for="chartMetricSelect">
+                    Metric:
+                    <select id="chartMetricSelect" class="chart-select">
+                        <option value="spearman">Spearman</option>
+                        <option value="pearson">Pearson</option>
+                    </select>
+                </label>
+                <label class="chart-control-group" for="sourceBSelect">
+                    Baseline:
+                    <select id="sourceBSelect" class="chart-select"></select>
+                </label>
+            </div>
+            <div class="charts-container">
+                <div class="chart-wrapper">
+                    <div class="chart-header">
+                        <h3>CRSArena-Eval Comparison</h3>
+                    </div>
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+                <div class="table-wrapper">
+                    <h3>Metric Comparison</h3>
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>Your evaluator</th>
+                                <th id="comparisonBaselineHeader">Baseline</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparisonTableBody"></tbody>
+                    </table>
+                    <p class="table-note" id="comparisonTableNote"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="evaluator.js?v=7"></script>
+</body>
+</html>
