@@ -10,21 +10,21 @@
 This is the repo for our paper: **[FACE: A Fine-grained Reference Free Evaluator for Conversational Recommender Systems](https://arxiv.org/abs/2506.00314)**.
 
 Specifically, the repository contains:  
-- The [**`CRSArena-Eval dataset`**](crs_arena_eval/) with human-annotated conversations and meta-evaluation scripts.
+- The [**`CRSArena-Eval dataset`**](dataset/) with human-annotated conversations and meta-evaluation scripts.
 - The [**`CRSArena-Eval interface`**](interface/) for interactive meta-evaluation of your evaluator vs. baselines.
-- The [**`FACE`**](face_method/) results for reproducing the reported numbers in the paper.
+- The [**`FACE`**](face/) results for reproducing the reported numbers in the paper.
 
 ## What is CRSArena-Eval and FACE?
 
 - **CRSArena-Eval** is a meta-evaluation dataset of human-annotated conversations between users and 9 Conversational Recommender Systems (CRSs), designed for evaluating CRS evaluators.
 - **FACE** is a **Fine-grained, Aspect-based Conversation Evaluation** method that provides evaluation scores for diverse turn and dialogue level qualities of recommendation conversations.
 
-## CRSArena-Eval Dataset Release
+## CRSArena-Eval Dataset Release (`dataset/`)
 
-The directory [`crs_arena_eval/`](crs_arena_eval/) contains the **CRSArena-Eval dataset**.
+The directory [`dataset/`](dataset/) contains the **CRSArena-Eval dataset**.
 This dataset is designed for **meta-evaluation** of CRS evaluators and is built on the [CRSArena-Dial dataset](https://github.com/iai-group/crsarena-dial).
 
-- [**`crs_arena_eval.json`**](crs_arena_eval/crs_arena_eval.json): The main dataset file containing 467 conversations with 4,473 utterances, annotated with both turn-level and dialogue-level quality scores by human evaluators.
+- [**`crs_arena_eval.json`**](dataset/crs_arena_eval.json): The main dataset file containing 467 conversations with 4,473 utterances, annotated with both turn-level and dialogue-level quality scores by human evaluators.
 
 ### Evaluation Aspects
 
@@ -49,31 +49,31 @@ This dataset is designed for **meta-evaluation** of CRS evaluators and is built 
 | Avg. words per system utterance | 15.18 |
 | # Final labels (after aggregation) | 6,805 |
 
-👉 For detailed dataset schema and structure, see [`crs_arena_eval/README.md`](crs_arena_eval/README.md).
+👉 For detailed dataset schema and structure, see [`dataset/README.md`](dataset/README.md).
 
 ### Evaluation
 
-The [`crs_arena_eval/run/`](crs_arena_eval/run/) directory contains scripts and data for reproducing the evaluation results reported in the paper.
+The [`dataset/run/`](dataset/run/) directory contains scripts and data for reproducing the evaluation results reported in the paper.
 
-- [**`eval.py`**](crs_arena_eval/run/eval.py): Evaluation script that computes Pearson and Spearman correlations between predictions and CRSArena-Eval human annotations.
+- [**`eval.py`**](dataset/run/eval.py): Evaluation script that computes Pearson and Spearman correlations between predictions and CRSArena-Eval human annotations.
 
-- [**`face_run.json`**](crs_arena_eval/run/face_run.json): FACE predictions for the CRSArena-Eval dataset in the standard run file format.
+- [**`face_run.json`**](dataset/run/face_run.json): FACE predictions for the CRSArena-Eval dataset in the standard run file format.
 
 
-## CRSArena-Eval Interactive Meta-Evaluation Interface
+## CRSArena-Eval Interactive Meta-Evaluation Interface (`interface/`)
 
 We provide an easy-to-use meta-evaluation interface to evaluate your evaluator against the CRSArena-Eval dataset.
 Visit: https://informagus.nl/face/
 
-![CRSArena-Eval demo](./crs_arena_eval/run/demo.gif)
+![CRSArena-Eval demo](./dataset/run/demo.gif)
 
 We also provide an python script to evaluate your evaluator on the CRSArena-Eval dataset.
 
-👉 For detailed run file format and evaluation instructions, see [`crs_arena_eval/run/README.md`](crs_arena_eval/run/README.md).
+👉 For detailed run file format and evaluation instructions, see [`dataset/run/README.md`](dataset/run/README.md).
 
-## FACE Method
+## FACE Method (`face/`)
 
-The [`face_method/`](face_method/) directory contains the implementation of the FACE evaluation method.
+The [`face/`](face/) directory contains the implementation of the FACE evaluation method.
 
 
 ## Citation
