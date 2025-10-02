@@ -41,3 +41,11 @@ To evaluate the run file against the CRSArena-Eval dataset, use the provided eva
 ```bash
 python evaluate.py --run_file path/to/run_file.json --data_file path/to/crs_arena_eval.json
 ```
+
+
+## Easy-to-Use Meta-Evaluation Interface
+
+We provide an easy-to-use meta-evaluation interface to evaluate your evaluator against the CRSArena-Eval dataset.
+Visit: https://hideaki-j.github.io/crsarena-eval/
+
+![CRSArena-Eval demo](demo.gif)
