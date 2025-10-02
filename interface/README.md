@@ -4,6 +4,8 @@ An interactive web-based evaluation tool for CRS Arena benchmarks. Upload your r
 
 Available at: https://informagus.nl/face/
 
+For run file format, see: [`dataset/run/README.md`](../dataset/run/README.md)
+
 ## Demo
 
 ![CRSArena-Eval demo](demo.gif)
