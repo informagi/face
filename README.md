@@ -11,7 +11,7 @@ This is the repo for our paper: **[FACE: A Fine-grained Reference Free Evaluator
 
 Specifically, the repository contains:  
 - The [**`CRSArena-Eval dataset`**](crs_arena_eval/) with human-annotated conversations and meta-evaluation scripts.
-- The [**`CRSArena-Eval interface`**](interface/) for interactive meta-evaluation of your evaluator vs. baseline evaluators.
+- The [**`CRSArena-Eval interface`**](interface/) for interactive meta-evaluation of your evaluator vs. baselines.
 - The [**`FACE`**](face_method/) results for reproducing the reported numbers in the paper.
 
 ## What is CRSArena-Eval and FACE?
