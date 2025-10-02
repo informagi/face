@@ -170,11 +170,11 @@ function parseGoldData(goldDataJson) {
     const turnGold = new Map();
     const dialGold = new Map();
     
-    for (const dialog of goldDataJson) {
-        const convId = dialog.conv_id;
-        dialGold.set(convId, dialog.dial_level_aggregated || {});
+    for (const dialogue of goldDataJson) {
+        const convId = dialogue.conv_id;
+        dialGold.set(convId, dialogue.dial_level_aggregated || {});
         
-        for (const turn of dialog.dialog || []) {
+        for (const turn of dialogue.dialogue || []) {
             if (turn.role !== "ASST") {
                 continue;
             }
@@ -190,9 +190,9 @@ function parseRunData(runDataJson) {
     const turnPreds = new Map();
     const dialPreds = new Map();
     
-    for (const dialog of runDataJson) {
-        const convId = dialog.conv_id;
-        const turnList = dialog.turns || [];
+    for (const dialogue of runDataJson) {
+        const convId = dialogue.conv_id;
+        const turnList = dialogue.turns || [];
         
         for (const turn of turnList) {
             const turnInd = parseInt(turn.turn_ind);
@@ -210,8 +210,8 @@ function parseRunData(runDataJson) {
         
         const dialLevelPred = {};
         for (const aspect of dialog_ASPECTS) {
-            if (dialog.dial_level_pred && aspect in dialog.dial_level_pred) {
-                dialLevelPred[aspect] = parseFloat(dialog.dial_level_pred[aspect]);
+            if (dialogue.dial_level_pred && aspect in dialogue.dial_level_pred) {
+                dialLevelPred[aspect] = parseFloat(dialogue.dial_level_pred[aspect]);
             }
         }
         dialPreds.set(convId, dialLevelPred);
