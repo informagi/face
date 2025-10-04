@@ -1,4 +1,4 @@
-# <div align="center"><img src="images/face_icon.png" alt="FACE icon" width="30" /> FACE: A Fine-grained Reference Free Evaluator<br>for Conversational Recommender Systems<div>
+# <div align="center"><img src="images/face_icon.png" alt="FACE icon" width="30" /> FACE: A Fine-grained Reference Free Evaluator for Conversational Recommender Systems<div>
 
 <div align="center">
     <a href="https://arxiv.org/abs/2506.00314" target="_blank"><img src=https://img.shields.io/badge/arXiv-b5212f.svg?logo=arxiv></a>
