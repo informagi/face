@@ -1,0 +1,21 @@
+{{ instruction_prompt }}
+
+Full Dialogue:
+{%- for turn in dialogue %}
+{%- if turn.role != "UNK" %}
+Turn {{ turn.turn_ind }} - {{ turn.role }}: {{ turn.utterance | clean_utterance }}
+{%- else %}
+Turn {{ turn.turn_ind }}: {{ turn.utterance | clean_utterance }}
+{%- endif %}
+{%- endfor %}
+
+Target Nugget to Evaluate (from Assistant's Turn {{ target_turn_ind }}):
+- {{ target_nugget }}
+
+{{ aspect }} description: {{ aspect_description }}
+{{ grading_description_string }}
+
+The output MUST be in JSON format with the following structure:
+{"{{ aspect }}_score": <{{ aspect }}_score ({{ min_score }}-{{ max_score }})>}
+
+Let's think step by step:

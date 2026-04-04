@@ -1,0 +1,37 @@
+{{ instruction_prompt }}
+
+Dialogue History:
+{%- set start_index = 0 if turn_index - 2 < 0 else turn_index - 2 -%}
+{%- for turn in dialogue[start_index:turn_index] %}
+{%- if turn.role != "UNK" %}
+Turn {{ turn.turn_ind }} - {{ turn.role }}: {{ turn.utterance | clean_utterance }}
+{%- else %}
+Turn {{ turn.turn_ind }}: {{ turn.utterance | clean_utterance }}
+{%- endif %}
+{%- endfor %}
+
+Current Assistant Turn:
+{%- set current = dialogue[turn_index] %}
+{%- if current.role != "UNK" %}
+Turn {{ current.turn_ind }} - {{ current.role }}: {{ current.utterance | clean_utterance }}
+{%- else %}
+Turn {{ current.turn_ind }}: {{ current.utterance | clean_utterance }}
+{%- endif %}
+
+Target Nugget (from Current Assistant Turn):
+{{ target_nugget }}
+
+User's Response:
+{%- if turn_index + 1 < dialogue|length %}
+{{ dialogue[turn_index + 1].utterance | clean_utterance }}
+{%- else %}
+N/A
+{%- endif %}
+
+{{ aspect }} description: {{ aspect_description }}
+{{ grading_description_string }}
+
+The output MUST be in JSON format with the following structure:
+{"{{ aspect }}_score": <{{ aspect }}_score ({{ min_score }}-{{ max_score }})>}
+
+Let's think step by step:

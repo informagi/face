@@ -1,0 +1,114 @@
+[
+  {
+    "filename": "01_itr25_score_dict_idx25.txt",
+    "rank": 1,
+    "iteration": 25,
+    "index": 25,
+    "text": "Task description: Evaluate a nugget based on its content and relevance to the user's preference. Step 1: Check the nugget's content. Step 2: Assess the recommended movie's relevance to the user's preference. Step 3: Verify if the user's preference informed the recommendation. Step 4: Combine the results to determine the nugget's score."
+  },
+  {
+    "filename": "02_itr17_score_dict_idx17.txt",
+    "rank": 2,
+    "iteration": 17,
+    "index": 17,
+    "text": "Task description: Evaluate a nugget based on its content.\n\nStep 1: Check the nugget's accuracy.\n  Does the nugget accurately represent the user's preference and its relation to the recommendation?\n  Is the nugget's information supported by the dialogue?\nStep 2: Assess the nugget's relevance.\n  Is the nugget's information necessary for understanding the recommendation?\n  Does the nugget provide any new insights or context that would improve the recommendation?"
+  },
+  {
+    "filename": "03_itr9_score_dict_idx9.txt",
+    "rank": 3,
+    "iteration": 9,
+    "index": 9,
+    "text": "Task description: Evaluate the quality of the target nugget based on its task completion.\n\nStep 1: Read the target nugget carefully.\n  * Does the nugget accurately convey the user's feedback?\nStep 2: Check if the nugget's information is relevant to the user's statement.\n  * Is the nugget's recommendation related to the user's interest in war fighting movies?\nStep 3: Assess the nugget's accuracy.\n  * Is the user's feedback about the movie accurate according to the dialogue?"
+  },
+  {
+    "filename": "04_itr84_score_dict_idx84.txt",
+    "rank": 4,
+    "iteration": 84,
+    "index": 84,
+    "text": "Task description: Evaluate the task completion aspect of the nugget.\n\nStep 1: Check task relevance\n  \u2022 Does the nugget describe a specific task (e.g., a movie recommendation)?\nStep 2: Evaluate accuracy\n  \u2022 Does the nugget accurately convey user interest in the recommended movie?\n  \u2022 Is the user's response to the recommendation enthusiastic or positive?\nStep 3: Assess task completion\n  \u2022 Is the user receptive to the recommendation?\n  \u2022 Does the nugget provide sufficient information to determine task completion?"
+  },
+  {
+    "filename": "05_itr24_score_dict_idx24.txt",
+    "rank": 5,
+    "iteration": 24,
+    "index": 24,
+    "text": "Task description: Evaluate a nugget based on its relevance, accuracy, usefulness, and impact to determine its contribution to the conversation.\n\nStep 1: Verify the nugget's content is consistent with the conversation.\nStep 2: Assess the nugget's usefulness in the context of the conversation.\nStep 3: Evaluate the nugget's impact on the conversation's progress or outcome.\nStep 4: Determine the nugget's overall relevance to the task or goal."
+  },
+  {
+    "filename": "06_itr30_score_dict_idx30.txt",
+    "rank": 6,
+    "iteration": 30,
+    "index": 30,
+    "text": "Task description: Evaluate a nugget based on task completion.\n\nStep 1: Check if the nugget conveys relevant information about the dialogue.\n  * Does the nugget mention the user's preference (e.g., dislike of a movie)?\n  * Is the nugget's information accurate?\nStep 2: Assess if the nugget's information is used correctly.\n  * Is the user's preference used to inform the recommendation?\n  * Does the evaluation consider the context of the dialogue?"
+  },
+  {
+    "filename": "07_itr36_score_dict_idx36.txt",
+    "rank": 7,
+    "iteration": 36,
+    "index": 36,
+    "text": "Task description: Evaluate the nugget's task completion aspect based on the provided dialogue.\n\nStep 1: Check relevance\n  \u2022 Does the nugget describe the task performed in the dialogue?\n  \u2022 Is the task completion aspect relevant to the conversation?\nStep 2: Evaluate accuracy\n  \u2022 Does the nugget accurately convey the task completion status?\n  \u2022 Is the task completion status consistent with the dialogue?\nStep 3: Assess information sufficiency\n  \u2022 Does the nugget provide enough information to determine task completion?"
+  },
+  {
+    "filename": "08_itr11_score_dict_idx11.txt",
+    "rank": 8,
+    "iteration": 11,
+    "index": 11,
+    "text": "Task description: Evaluate a nugget based on its relevance to the conversation.\n\nStep 1: Identify the context of the nugget (e.g., conversation topic, time frame, user preferences).\n  * Does the nugget's recommendation align with the conversation topic?\n  * Is the nugget's recommendation relevant to the specified time frame?\n  * Does the nugget's recommendation match the user's expressed preferences?\nStep 2: Assess the nugget's quality based on its alignment with the context.\n  * Is the nugget's recommendation accurate and relevant?\n  * Does the nugget's recommendation demonstrate an understanding of the conversation?\nStep 3: Determine the task completion score based on the nugget's quality.\n  * Assign a score based on the nugget's alignment with the conversation context and user preferences."
+  },
+  {
+    "filename": "09_itr85_score_dict_idx85.txt",
+    "rank": 9,
+    "iteration": 85,
+    "index": 85,
+    "text": "Task description: Evaluate the task completion aspect of the nugget based on its information.\n\nStep 1: Examine the nugget's 'NUGGET' field.\n  \u2022 Does the 'NUGGET' field contain relevant information about the task?\n  \u2022 Is the 'NUGGET' field aligned with the dialogue context?\nStep 2: Check the task completion status.\n  \u2022 Does the 'DIALOGUE_ACT' field indicate task completion?\n  \u2022 Is the 'USER_FEEDBACK' field relevant to task completion?"
+  },
+  {
+    "filename": "10_itr23_score_dict_idx23.txt",
+    "rank": 10,
+    "iteration": 23,
+    "index": 23,
+    "text": "Evaluate the nugget's quality based on completeness and relevance. Step 1: Check if the nugget contains the expected fields. Step 2: Verify if the nugget directly addresses the user's needs or preferences mentioned in the dialogue."
+  },
+  {
+    "filename": "11_itr5_score_dict_idx5.txt",
+    "rank": 11,
+    "iteration": 5,
+    "index": 5,
+    "text": "Task description: Evaluate a nugget based on the task completion aspect.\n\nStep 1: Check if the nugget conveys the correct information about the dialogue.\n  * Does the nugget mention the relevant user preference (e.g., dislike of Al Pacino)?\n  * Does the nugget indicate if the user's preference was used to inform the recommendation?\n  Step 2: Assess the relevance of the recommended movie.\n  * Is the recommended movie consistent with the user's preference?\n  * Does the recommended movie match the time frame specified by the user?"
+  },
+  {
+    "filename": "12_itr10_score_dict_idx10.txt",
+    "rank": 12,
+    "iteration": 10,
+    "index": 10,
+    "text": "Task description: Evaluate the quality of the target nugget based on its relevance to the conversation.\n\nStep 1: Does the nugget accurately convey a specific aspect of the conversation?\nStep 2: Is the nugget's information relevant to the user's request or sentiment?\nStep 3: Does the nugget capture the essence of the conversation's context?"
+  },
+  {
+    "filename": "13_itr21_score_dict_idx21.txt",
+    "rank": 13,
+    "iteration": 21,
+    "index": 21,
+    "text": "Task description: Evaluate a nugget based on its relevance and accuracy in the conversation.\n\nStep 1: Check if the nugget mentions the user's preference.\n  * Does the nugget mention the relevant user preference (e.g., a favorite movie)?\n  * Is the user's preference used to inform the recommendation?\nStep 2: Assess the nugget's relevance to the conversation context.\n  * Is the recommended movie consistent with the user's preference?\n  * Does the recommended movie match the conversation context?\n  * Does the nugget provide accurate and relevant information about the user's preference?"
+  },
+  {
+    "filename": "14_itr72_score_dict_idx72.txt",
+    "rank": 14,
+    "iteration": 72,
+    "index": 72,
+    "text": "Task description: Evaluate the task completion aspect of the nugget.\n\nStep 1: Check task relevance\n  \u2022 Does the nugget describe a movie recommendation task?\nStep 2: Evaluate user interest\n  \u2022 Is the user's response consistent with the task of finding a movie they liked?\n  \u2022 Does the nugget accurately convey the user's interest in the recommended movie?\nStep 3: Assess task completion\n  \u2022 Is the user's feedback consistent with the recommended movie?"
+  },
+  {
+    "filename": "15_itr4_score_dict_idx4.txt",
+    "rank": 15,
+    "iteration": 4,
+    "index": 4,
+    "text": "Task description: Evaluate the quality of a nugget based on its relevance to the conversation.\n\nStep 1: Review the conversation history to understand the context of the nugget.\nStep 2: Check if the nugget accurately conveys the assistant's intent and task completion in that specific context.\nStep 3: Evaluate if the nugget's information is relevant to the conversation and the task at hand.\nStep 4: Assign a score based on the nugget's accuracy and relevance."
+  },
+  {
+    "filename": "16_itr7_score_dict_idx7.txt",
+    "rank": 16,
+    "iteration": 7,
+    "index": 7,
+    "text": "{\"task_description\": \"Given a nugget, evaluate its quality based on its relevance to the conversation.\", \"step_by_step_instructions\": [\"Step 1: Read the full dialogue and identify the conversation context.\", \"Step 2: Check if the nugget is a direct response to a question or prompt in the conversation. Does the nugget provide a relevant answer or clarification?\", \"Step 3: Verify if the nugget is necessary for the conversation flow. Is the nugget used to steer the conversation in a specific direction or provide crucial information?\"]"
+  }
+]

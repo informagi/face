@@ -1,0 +1,125 @@
+{
+  "conversation_id": "face_conv",
+  "aspect": "dialogue_overall",
+  "evaluation_level": "dialogue_level",
+  "model": "meta-llama/llama-4-scout:free",
+  "sampling_num": 1,
+  "num_try": 10,
+  "num_prompts": 1,
+  "score_range": {
+    "min": 0,
+    "max": 4
+  },
+  "prompt_results": [
+    {
+      "rank": 1,
+      "prompt_file": "01_itr71_score_dict_idx71.txt",
+      "overall_score": 0.0,
+      "nugget_breakdown": [
+        {
+          "turn_index": 1,
+          "nugget_index": 0,
+          "avg_score": 0,
+          "avg_weight": 1.0,
+          "samples": [
+            {
+              "dialogue_overall_score": 0,
+              "weight_score": 1.0
+            }
+          ]
+        },
+        {
+          "turn_index": 1,
+          "nugget_index": 1,
+          "avg_score": 0,
+          "avg_weight": 1.0,
+          "samples": [
+            {
+              "dialogue_overall_score": 0,
+              "weight_score": 1.0
+            }
+          ]
+        },
+        {
+          "turn_index": 3,
+          "nugget_index": 0,
+          "avg_score": 0,
+          "avg_weight": 1.0,
+          "samples": [
+            {
+              "dialogue_overall_score": 0,
+              "weight_score": 1.0
+            }
+          ]
+        },
+        {
+          "turn_index": 3,
+          "nugget_index": 1,
+          "avg_score": 0,
+          "avg_weight": 1.0,
+          "samples": [
+            {
+              "dialogue_overall_score": 0,
+              "weight_score": 1.0
+            }
+          ]
+        },
+        {
+          "turn_index": 5,
+          "nugget_index": 0,
+          "avg_score": 0,
+          "avg_weight": 1.0,
+          "samples": [
+            {
+              "dialogue_overall_score": 0,
+              "weight_score": 1.0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ensemble": {
+    "mean": 0.0,
+    "median": 0.0,
+    "min": 0.0,
+    "max": 0.0
+  },
+  "per_nugget_ensemble": [
+    {
+      "turn_index": 1,
+      "nugget_index": 0,
+      "mean_score": 0,
+      "median_score": 0,
+      "num_votes": 1
+    },
+    {
+      "turn_index": 1,
+      "nugget_index": 1,
+      "mean_score": 0,
+      "median_score": 0,
+      "num_votes": 1
+    },
+    {
+      "turn_index": 3,
+      "nugget_index": 0,
+      "mean_score": 0,
+      "median_score": 0,
+      "num_votes": 1
+    },
+    {
+      "turn_index": 3,
+      "nugget_index": 1,
+      "mean_score": 0,
+      "median_score": 0,
+      "num_votes": 1
+    },
+    {
+      "turn_index": 5,
+      "nugget_index": 0,
+      "mean_score": 0,
+      "median_score": 0,
+      "num_votes": 1
+    }
+  ]
+}

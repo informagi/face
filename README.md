@@ -12,7 +12,7 @@ This is the repo for our paper: **[FACE: A Fine-grained Reference Free Evaluator
 Specifically, the repository contains:  
 - The [**`CRSArena-Eval dataset`**](dataset/) with human-annotated conversations and meta-evaluation scripts.
 - The [**`CRSArena-Eval interface`**](interface/) for interactive meta-evaluation of your evaluator vs. baselines.
-- The [**`FACE`**](face/) results for reproducing the reported numbers in the paper.
+- The [**`FACE`**](face/) implementation with particle generation and scoring tools.
 
 ## What is CRSArena-Eval and FACE?
 
@@ -60,21 +60,43 @@ The [`dataset/run/`](dataset/run/) directory contains scripts and data for repro
 - [**`face_run.json`**](dataset/run/face_run.json): FACE predictions for the CRSArena-Eval dataset in the standard run file format.
 
 
-## CRSArena-Eval Interactive Meta-Evaluation Interface (`interface/`)
-
-We provide an easy-to-use meta-evaluation interface to evaluate your evaluator against the CRSArena-Eval dataset.
-Visit: https://informagus.nl/face/
-
-![CRSArena-Eval demo](./dataset/run/demo.gif)
-
-We also provide an python script to evaluate your evaluator on the CRSArena-Eval dataset.
-
-👉 For detailed run file format and evaluation instructions, see [`dataset/run/README.md`](dataset/run/README.md).
-
 ## FACE Method (`face/`)
 
 The [`face/`](face/) directory contains the implementation of the FACE evaluation method.
 
+- [**`particle_generation/`**](face/particle_generation/): Converts dialogue turns into atomic **conversation particles** -- self-contained information units consisting of dialogue acts, text mentions, and user feedback.
+- [**`face_scoring/`**](face/face_scoring/): Scores particle-based dialogues using **16 optimized prompts** per aspect, aggregating results to turn/dialogue-level scores.
+- [**`reproduce_result_table/`**](face/reproduce_result_table/): Scripts for reconstructing the main result table from the paper.
+
+### Quick Start
+
+1. **Install dependencies** (requires [uv](https://astral.sh/uv)):
+   ```bash
+   cd face && uv sync
+   ```
+2. **Generate particles** from a conversation:
+   ```bash
+   uv run particle_generation/particle_generator.py examples/example_conv.json \
+       --turn-index 1 --speaker ASST --samples 10
+   ```
+3. **Score a conversation** with FACE:
+   ```bash
+   uv run face_scoring/face.py --conversation examples/example_particles.json \
+       --aspect dialogue_overall
+   ```
+
+👉 For detailed usage, LLM setup, and available aspects, see [`face/README.md`](face/README.md).
+
+## CRSArena-Eval Interactive Meta-Evaluation Interface (`interface/`)
+
+We provide an easy-to-use meta-evaluation interface to evaluate your evaluator against the CRSArena-Eval dataset.
+See [`interface/README.md`](interface/README.md) for detailed instructions on how to run the interface locally.
+
+![CRSArena-Eval demo](./demo/demo.gif)
+
+We also provide a python script to evaluate your evaluator on the CRSArena-Eval dataset.
+
+👉 For detailed run file format and evaluation instructions, see [`dataset/run/README.md`](dataset/run/README.md).
 
 ## Citation
 

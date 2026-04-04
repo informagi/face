@@ -42,10 +42,9 @@ To evaluate the run file against the CRSArena-Eval dataset, use the provided eva
 python evaluate.py --run_file path/to/run_file.json --data_file path/to/crs_arena_eval.json
 ```
 
-
 ## Easy-to-Use Meta-Evaluation Interface
 
 We provide an easy-to-use meta-evaluation interface to evaluate your evaluator against the CRSArena-Eval dataset.
-Visit: https://informagus.nl/face/
+See [`interface/README.md`](../../interface/README.md) for detailed instructions on how to run the interface locally.
 
-![CRSArena-Eval demo](demo.gif)
+![CRSArena-Eval demo](../../demo/demo.gif)

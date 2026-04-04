@@ -1,0 +1,13 @@
+[project]
+name = "face"
+version = "0.1.0"
+description = "FACE: Fine-grained Aspect-based Conversation Evaluator"
+requires-python = ">=3.9"
+dependencies = [
+    "requests",
+    "tqdm",
+    "python-dotenv",
+    "jinja2>=3.1.6",
+    "numpy",
+    "scipy",
+]

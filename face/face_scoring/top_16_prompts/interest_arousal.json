@@ -1,0 +1,114 @@
+[
+  {
+    "filename": "01_itr78_score_dict_idx78.txt",
+    "rank": 1,
+    "iteration": 78,
+    "index": 78,
+    "text": "Evaluate a nugget by assessing its accuracy and relevance to the user's conversation history. Check if the nugget reflects the user's previous statements and topics of interest, assess the user's interest in the nugget's recommended item, align the nugget's purpose with the user's feedback, and evaluate the nugget's overall relevance and usefulness."
+  },
+  {
+    "filename": "02_itr87_score_dict_idx87.txt",
+    "rank": 2,
+    "iteration": 87,
+    "index": 87,
+    "text": "Evaluate a nugget by checking its accuracy, user interest, and alignment with user engagement. Follow these steps: Check the nugget's accuracy, assess user interest, and evaluate the nugget's purpose. Use the following checklist: Does the nugget accurately reflect the user's conversation history? Is the user enthusiastic about the recommended item? Does the nugget's purpose align with the user's feedback and preferences?"
+  },
+  {
+    "filename": "03_itr55_score_dict_idx55.txt",
+    "rank": 3,
+    "iteration": 55,
+    "index": 55,
+    "text": "Task description: Evaluate a nugget's quality based on interest_arousal.\n\nStep 1: Step 1: Does the nugget contain a clear and concise recommendation?\n    - Does the nugget explicitly state a recommendation?\n    - Is the recommendation relevant to the user's query?\nStep 2: Does the user show interest in the recommended item?\n    - Is the user's feedback positive and enthusiastic?\n    - Does the user express a clear intention to take action?"
+  },
+  {
+    "filename": "04_itr72_score_dict_idx72.txt",
+    "rank": 4,
+    "iteration": 72,
+    "index": 72,
+    "text": "Evaluate a nugget by assessing its relevance to the user's conversation history and interest in the recommended item. Check if the nugget accurately reflects the user's conversation history and captures their interest in the recommended item. Ensure the nugget's purpose aligns with the user's engagement and feedback."
+  },
+  {
+    "filename": "05_itr11_score_dict_idx11.txt",
+    "rank": 5,
+    "iteration": 11,
+    "index": 11,
+    "text": "Task description: Evaluate the quality of the target nugget based on the interest_arousal aspect.\n\nStep 1: Identify the user's interest in the recommended item.\n  * Does the user show explicit interest in the recommendation?\n  * Is the user's interest related to the recommendation?\nStep 2: Assess the relevance of the recommendation.\n  * Is the recommendation relevant to the user's preferences and interests?\n  * Does the recommendation align with the user's previous responses?\nStep 3: Evaluate the nugget's effectiveness.\n  * Does the nugget convey a clear and concise message?\n  * Does the nugget provide a valuable suggestion?\n  * Does the nugget demonstrate understanding of the user's preferences?"
+  },
+  {
+    "filename": "06_itr44_score_dict_idx44.txt",
+    "rank": 6,
+    "iteration": 44,
+    "index": 44,
+    "text": "{\"task_description\": \"Evaluate a nugget based on interest_arousal aspect.\", \"step_1\": \"Step 1: Extract the nugget's core information.\", \"step_1_details\": [\"Check if the nugget conveys a clear recommendation or suggestion.\", \"Verify if the nugget is related to the conversation topic.\"], \"step_2\": \"Step 2: Assess the nugget's relevance and alignment.\", \"step_2_details\": [\"Does the nugget align with the user's feedback?\", \"Is the nugget relevant to the user's interests or needs?\", \"Does the user's feedback support the nugget's interest_arousal score?\"], \"step_3\": \"Step 3: Evaluate the interest_arousal score.\", \"step_3_details\": [\"Does the nugget likely engage the user?, \"Does the user's feedback suggest they would enjoy the recommended content?\"]"
+  },
+  {
+    "filename": "07_itr82_score_dict_idx82.txt",
+    "rank": 7,
+    "iteration": 82,
+    "index": 82,
+    "text": "Evaluate a nugget by checking three things:\nStep 1: Does the nugget accurately reflect the user's conversation history and mention the recommended item?\nStep 2: Is the nugget's purpose aligned with the user's engagement and feedback?\nStep 3: Does the nugget capture the user's interest in the recommended item?\nStep 4: Evaluate relevance and purpose alignment together."
+  },
+  {
+    "filename": "08_itr93_score_dict_idx93.txt",
+    "rank": 8,
+    "iteration": 93,
+    "index": 93,
+    "text": "Evaluate a nugget by checking its accuracy, assessing the user's interest, and aligning its purpose with user engagement. Follow these steps: Check the nugget's accuracy, assess the user's interest, align the nugget's purpose with user engagement, and evaluate the nugget's overall quality."
+  },
+  {
+    "filename": "09_itr86_score_dict_idx86.txt",
+    "rank": 9,
+    "iteration": 86,
+    "index": 86,
+    "text": "Task Description: Evaluate a nugget by assessing its accuracy, relevance, and alignment with the user's engagement and feedback.\nStep 1: Check Relevance. Does the nugget accurately reflect the user's conversation history and mention the recommended item? Is the recommended item mentioned in the correct context?\nStep 2: Assess User Interest. Does the nugget capture the user's interest in the recommended item? Does the user's response indicate a positive, negative, or neutral reaction to the recommended item?\nStep 3: Evaluate Purpose Alignment. Is the nugget's purpose aligned with the user's engagement and feedback? Does the nugget aim to provide helpful suggestions or recommendations based on the user's preferences and interests?"
+  },
+  {
+    "filename": "10_itr80_score_dict_idx80.txt",
+    "rank": 10,
+    "iteration": 80,
+    "index": 80,
+    "text": "Task description: Evaluate a nugget to assess its accuracy, user interest, and engagement alignment. Step 1: Check if the nugget accurately reflects the user's conversation history. Step 2: Assess the user's interest in the recommended item. Step 3: Align the nugget's purpose with the user's feedback. Step 4: Evaluate the nugget's overall effectiveness."
+  },
+  {
+    "filename": "11_itr88_score_dict_idx88.txt",
+    "rank": 11,
+    "iteration": 88,
+    "index": 88,
+    "text": "Evaluate a nugget by checking its accuracy, assessing user interest, and aligning its purpose with user engagement. Check the nugget's accuracy and consistency with user history, evaluate user interest and feedback, and align the nugget's purpose with user engagement and conversation goals."
+  },
+  {
+    "filename": "12_itr54_score_dict_idx54.txt",
+    "rank": 12,
+    "iteration": 54,
+    "index": 54,
+    "text": "Task description: Evaluate the quality of a nugget based on the interest_arousal aspect.\n\nStep 1: Identify the nugget's information.\n  Does the nugget convey a clear recommendation or suggestion?\n  Is the nugget related to the conversation topic?\n\nStep 2: Assess the nugget's relevance.\n  Does the nugget align with the user's feedback?\n  Is the nugget relevant to the user's interests or needs?\n\nStep 3: Evaluate the nugget's engagement potential.\n  Does the nugget suggest a suitable or unsuitable recommendation?\n  Does the nugget align with the user's interests or needs?\n  Does the user's feedback suggest potential engagement or disinterest?"
+  },
+  {
+    "filename": "13_itr12_score_dict_idx12.txt",
+    "rank": 13,
+    "iteration": 12,
+    "index": 12,
+    "text": "Task description: Given a target nugget, evaluate its quality based on the interest_arousal aspect.\n\nStep-by-step instructions:\nStep 1: Check the nugget's content.\n  * Does the nugget convey relevant information about the user's interest_arousal?\n  * Is the nugget focused on the interest_arousal aspect?\nStep 2: Verify the nugget's accuracy.\n  * Is the nugget supported by the dialogue?\n  * Does the nugget accurately reflect the user's interest_arousal?\nStep 3: Assess the nugget's value.\n  * Is the nugget relevant to the user's preferences?\n  * Does the nugget provide valuable information for future interactions?"
+  },
+  {
+    "filename": "14_itr38_score_dict_idx38.txt",
+    "rank": 14,
+    "iteration": 38,
+    "index": 38,
+    "text": "{\"task_description\": \"Evaluate a nugget's quality based on interest_arousal.\", \"instructions\": [\"Step 1: Does the nugget provide relevant and user-centric information?\", \"Step 2: Does the user express interest in the recommended item? Check for explicit feedback or actions indicating interest\", \"Step 3: Is the nugget's purpose aligned with the user's engagement? Check if the user's actions or feedback suggest they are engaged with the recommended item\"]"
+  },
+  {
+    "filename": "15_itr1_score_dict_idx1.txt",
+    "rank": 15,
+    "iteration": 1,
+    "index": 1,
+    "text": "Task description: Evaluate the quality of a nugget extracted from a dialogue.\n\nStep 1: Understand the nugget's context.\n  * Does the nugget convey a recommendation?\n  * Is the recommendation relevant to the conversation?\nStep 2: Assess the nugget's interest-arousal aspect.\n  * Does the user show genuine interest in the recommended item?\n  * Does the user's feedback indicate a positive response to the recommendation?\nStep 3: Evaluate the nugget's relevance.\n  * Is the recommended item discussed in the surrounding dialogue?\n  * Does the user's feedback align with the nugget's content?"
+  },
+  {
+    "filename": "16_itr20_score_dict_idx20.txt",
+    "rank": 16,
+    "iteration": 20,
+    "index": 20,
+    "text": "Task description: Evaluate the quality of a nugget based on the interest_arousal aspect.\n\nStep 1: Check if the nugget conveys relevant information.\n  * Does the nugget mention the user\"s preference or request?\n  * Does the nugget contain a key quote or statement from the dialogue?\n\nStep 2: Assess the completeness of the nugget.\n  * Does the nugget capture the main idea or topic of the dialogue?\n  * Is the nugget sufficient for making an informed decision based on the conversation?"
+  }
+]

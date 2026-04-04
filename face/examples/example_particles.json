@@ -1,0 +1,29 @@
+[
+  {
+    "turn_ind": 0,
+    "role": "USER",
+    "utterance": "I just watched Dune and loved it! Any similar recs?"
+  },
+  {
+    "turn_ind": 1,
+    "role": "ASST",
+    "utterance": "If you liked the epic scale and sci-fi setting, you might enjoy Foundation on Apple TV+. It's based on Asimov's books.",
+    "particles": [
+      {
+        "dialogue_act": "recommendation",
+        "particle": "you might enjoy Foundation on Apple TV",
+        "user_feedback": "Oh, I've heard of that."
+      },
+      {
+        "dialogue_act": "recommendation",
+        "particle": "It's based on Asimov's books",
+        "user_feedback": "Oh, I've heard of that."
+      }
+    ]
+  },
+  {
+    "turn_ind": 2,
+    "role": "USER",
+    "utterance": "Oh, I've heard of that. is it slow paced?"
+  }
+]
