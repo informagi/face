@@ -1,4 +1,4 @@
-# <div align="center"><img src="images/face_icon.png" alt="FACE icon" width="30" /> FACE: A Fine-grained Reference Free Evaluator for Conversational Recommender Systems<div>
+# <div align="center"><img src="images/face_icon.png" alt="FACE icon" width="30" /> FACE: A Fine-Grained Reference-Free Evaluator for Conversational Information Access<div>
 
 <div align="center">
     <a href="https://arxiv.org/abs/2506.00314" target="_blank"><img src=https://img.shields.io/badge/arXiv-b5212f.svg?logo=arxiv></a>
@@ -7,7 +7,7 @@
     </a>
 </div>
 
-This is the repo for our paper: **[FACE: A Fine-grained Reference Free Evaluator for Conversational Recommender Systems](https://arxiv.org/abs/2506.00314)**.
+This is the repo for our paper: **[FACE: A Fine-Grained Reference-Free Evaluator for Conversational Information Access](https://arxiv.org/abs/2506.00314)**.
 
 Specifically, the repository contains:  
 - The [**`CRSArena-Eval dataset`**](dataset/) with human-annotated conversations and meta-evaluation scripts.
@@ -101,11 +101,12 @@ We also provide a python script to evaluate your evaluator on the CRSArena-Eval 
 ## Citation
 
 ```bibtex
-@article{Joko:2025:FACE,
-  title={FACE: A Fine-grained Reference Free Evaluator for Conversational Recommender Systems},
+@inproceedings{Joko:2026:FACE,
+  title={FACE: A Fine-Grained Reference-Free Evaluator for Conversational Information Access},
   author={Joko, Hideaki and Hasibi, Faegheh},
-  journal={arXiv preprint arXiv:2506.00314},
-  year={2025}
+  booktitle={Proceedings of the 49th International ACM SIGIR Conference on Research and Development in Information Retrieval},
+  year={2026},
+  address={Melbourne, Australia}
 }
 ```
 
