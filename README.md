@@ -105,8 +105,7 @@ We also provide a python script to evaluate your evaluator on the CRSArena-Eval 
   title={FACE: A Fine-Grained Reference-Free Evaluator for Conversational Information Access},
   author={Joko, Hideaki and Hasibi, Faegheh},
   booktitle={Proceedings of the 49th International ACM SIGIR Conference on Research and Development in Information Retrieval},
-  year={2026},
-  address={Melbourne, Australia}
+  year={2026}
 }
 ```
 
