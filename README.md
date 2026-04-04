@@ -7,7 +7,7 @@
     </a>
 </div>
 
-This is the repo for our paper: **[FACE: A Fine-Grained Reference-Free Evaluator for Conversational Information Access](https://arxiv.org/abs/2506.00314)**.
+This is the repo for the paper: **[FACE: A Fine-Grained Reference-Free Evaluator for Conversational Information Access](https://arxiv.org/abs/2506.00314)**, Hideaki Joko, Faegheh Hasibi, SIGIR 2026.
 
 Specifically, the repository contains:  
 - The [**`CRSArena-Eval dataset`**](dataset/) with human-annotated conversations and meta-evaluation scripts.
