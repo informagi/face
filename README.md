@@ -90,6 +90,8 @@ The [`face/`](face/) directory contains the implementation of the FACE evaluatio
 ## CRSArena-Eval Interactive Meta-Evaluation Interface (`interface/`)
 
 We provide an easy-to-use meta-evaluation interface to evaluate your evaluator against the CRSArena-Eval dataset.
+The public interface is hosted at
+[`https://informagi.github.io/face/interface/`](https://informagi.github.io/face/interface/).
 See [`interface/README.md`](interface/README.md) for detailed instructions on how to run the interface locally.
 
 ![CRSArena-Eval demo](./demo/demo.gif)

@@ -11,7 +11,8 @@ cd interface
 python3 -m http.server 8000
 ```
 
-Note that, upon acceptance, **we will host this interface online for public use.**
+The public interface is hosted at
+[`https://informagi.github.io/face/interface/`](https://informagi.github.io/face/interface/).
 
 For run file format, see: [`dataset/run/README.md`](../dataset/run/README.md)
 

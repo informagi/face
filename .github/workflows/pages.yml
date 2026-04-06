@@ -1,4 +1,4 @@
-name: Deploy interface to Pages
+name: Deploy site to Pages
 on:
   push:
     branches: [main]
@@ -21,8 +21,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Build Pages artifact
+        run: |
+          rm -rf dist
+          mkdir -p dist
+          mkdir -p dist/interface
+          cp -R interface/. dist/interface/
+          touch dist/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: interface
+          path: dist
       - id: deploy
         uses: actions/deploy-pages@v4
