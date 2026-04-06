@@ -5,6 +5,9 @@ const TURN_ASPECTS = ["relevance", "interestingness"];
 const dialog_ASPECTS = ["understanding", "task_completion", "interest_arousal", "efficiency", "dialog_overall"];
 const ALL_ASPECTS = [...TURN_ASPECTS, ...dialog_ASPECTS];
 const CHART_LABELS = ALL_ASPECTS.map(aspect => aspect.replace(/_/g, ' '));
+const DIALOG_ASPECT_ALIASES = {
+    dialog_overall: ["dialog_overall", "dialogue_overall", "overall_impression"]
+};
 const DATASET_ORDER = ["redial", "opendialkg"];
 const DATASET_LABELS = {
     redial: "CRSArena-Eval (ReDial)",
@@ -210,8 +213,12 @@ function parseRunData(runDataJson) {
         
         const dialLevelPred = {};
         for (const aspect of dialog_ASPECTS) {
-            if (dialogue.dial_level_pred && aspect in dialogue.dial_level_pred) {
-                dialLevelPred[aspect] = parseFloat(dialogue.dial_level_pred[aspect]);
+            const candidateKeys = DIALOG_ASPECT_ALIASES[aspect] || [aspect];
+            for (const key of candidateKeys) {
+                if (dialogue.dial_level_pred && key in dialogue.dial_level_pred) {
+                    dialLevelPred[aspect] = parseFloat(dialogue.dial_level_pred[key]);
+                    break;
+                }
             }
         }
         dialPreds.set(convId, dialLevelPred);

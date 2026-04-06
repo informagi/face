@@ -27,19 +27,21 @@ The same format as CRSArena-Eval dataset, but with predicted scores instead of h
       "task_completion": float, # Task Completion score (0-2)
       "interest_arousal": float, # Interest Arousal score (0-2)
       "efficiency": float,    # Efficiency score (0-2)
-      "overall_impression": float # Overall Impression score (0-2)
+      "dialogue_overall": float # Overall Impression score (0-4)
     }
   # ... more conversations
   }
 ]
 ```
 
+The evaluation script and interface also accept the legacy aliases `dialog_overall` and `overall_impression`.
+
 ## Evaluation
 
 To evaluate the run file against the CRSArena-Eval dataset, use the provided evaluation script:
 
 ```bash
-python evaluate.py --run_file path/to/run_file.json --data_file path/to/crs_arena_eval.json
+python eval.py --run_file path/to/run_file.json --eval_file path/to/crs_arena_eval.json
 ```
 
 ## Easy-to-Use Meta-Evaluation Interface

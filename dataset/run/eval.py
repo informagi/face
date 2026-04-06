@@ -16,6 +16,9 @@ from scipy.stats import pearsonr, spearmanr
 DEFAULT_EVAL_PATH = Path(__file__).resolve().parent.parent / "crs_arena_eval.json"
 TURN_ASPECTS = ["relevance", "interestingness"]
 DIALOGUE_ASPECTS = ["understanding", "task_completion", "interest_arousal", "efficiency", "dialogue_overall"]
+DIALOGUE_ASPECT_ALIASES = {
+    "dialogue_overall": ["dialogue_overall", "dialog_overall", "overall_impression"],
+}
 DATASET_ORDER = ("redial", "opendialkg")
 
 
@@ -68,11 +71,15 @@ def load_run_predictions(path: Path) -> tuple[Dict[Tuple[str, int], Dict[str, fl
                 for aspect, value in turn.get("turn_level_pred", {}).items()
                 if aspect in TURN_ASPECTS
             }
-        dial_preds[conv_id] = {
-            aspect: float(dialog.get("dial_level_pred", {}).get(aspect))
-            for aspect in DIALOGUE_ASPECTS
-            if aspect in dialog.get("dial_level_pred", {})
-        }
+        dial_level_pred = dialog.get("dial_level_pred", {})
+        normalized_dialog_preds: Dict[str, float] = {}
+        for aspect in DIALOGUE_ASPECTS:
+            candidate_keys = DIALOGUE_ASPECT_ALIASES.get(aspect, [aspect])
+            for key in candidate_keys:
+                if key in dial_level_pred:
+                    normalized_dialog_preds[aspect] = float(dial_level_pred[key])
+                    break
+        dial_preds[conv_id] = normalized_dialog_preds
 
     return turn_preds, dial_preds
 
