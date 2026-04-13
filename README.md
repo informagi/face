@@ -85,7 +85,7 @@ The [`face/`](face/) directory contains the implementation of the FACE evaluatio
        --aspect dialogue_overall
    ```
 
-👉 For detailed usage, LLM setup, and available aspects, see [`face/README.md`](face/README.md).
+👉 For detailed usage, LLM setup, and available aspects, see [`face/README.md`](face/README.md).  
 👉 For notation, particles, and scoring clarifications, see [`docs/faq.md`](docs/faq.md).
 
 ## CRSArena-Eval Interactive Meta-Evaluation Interface (`interface/`)
