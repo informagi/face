@@ -15,6 +15,7 @@ face/
 ├── reproduce_result_table/  # Reproduce Table 2 correlations
 │   ├── generate_result_table.py # Correlation computation script
 │   └── run_files/               # Pre-computed FACE scores (JSONL)
+│       └── particles/           # Exact particle run artifact for Table 2
 ├── results/                 # Output directory for new evaluations
 └── prompt_overview.md       # Documentation of prompt structure
 ```
@@ -118,6 +119,8 @@ uv run python reproduce_result_table/generate_result_table.py
 ```
 
 This loads the 7 aspect-specific run files from `run_files/`, aggregates scores, and computes Pearson/Spearman correlations against CRSArena-Eval human annotations.
+
+The exact particle text behind the released `particle_ind` references is available in `reproduce_result_table/run_files/particles/run_particles.json`.
 
 ### Run File Format
 

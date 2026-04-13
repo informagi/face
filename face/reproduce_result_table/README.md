@@ -12,7 +12,10 @@ run_files/
 ├── task_completion.jsonl
 ├── efficiency.jsonl
 ├── interest_arousal.jsonl
-└── dialogue_overall.jsonl
+├── dialogue_overall.jsonl
+└── particles/
+    ├── README.md
+    └── run_particles.json
 ```
 
 The `run_files/` directory contains pre-computed scores for all **7 evaluation aspects**, separated into individual files:
@@ -26,6 +29,8 @@ The `run_files/` directory contains pre-computed scores for all **7 evaluation a
 | `efficiency` | Dialogue | Does the assistant suggest items matching user's interests within first three interactions? |
 | `interest_arousal` | Dialogue | Does the assistant try to spark the user's interest in something new? |
 | `dialogue_overall` | Dialogue | What is the overall impression of the assistant's performance? |
+
+The exact particle texts behind these `particle_ind` references are released in [`run_files/particles/run_particles.json`](run_files/particles/run_particles.json).
 
 ## Run File Format
 
