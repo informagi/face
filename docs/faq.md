@@ -67,7 +67,7 @@ Equation (1) computes an expected score across multiple samples, and yes, in pra
 
 Ideally, this should be computed with token probabilities, similar to [G-Eval](https://arxiv.org/abs/2303.16634). In our experiments, however, [SGLang](https://arxiv.org/abs/2312.07104) did not expose the token probabilities we needed at the time of our experiments, so we approximated it by rerunning the same prompt multiple times with the same input, which is the same approach taken by G-Eval.
 
-### Why not just take the most frequent score instead of estimating the expectation?
+### Why not just take the most frequent score?
 
 The main reason is low variance. As noted in [G-Eval](https://arxiv.org/abs/2303.16634), "one digit usually dominates the distribution of the scores," and we observed the same general trend in our preliminary experiments.
 
