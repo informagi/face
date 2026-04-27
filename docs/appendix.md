@@ -9,7 +9,7 @@ For each evaluation aspect $\alpha$, FACE scores each conversation particle $p$ 
 
 In CRSArena-Eval, the released FACE run files contain 6,274 particles over 2,220 scored assistant turns for the complete aspect files, corresponding to $|\mathbf{P}_x| = 2.83$ particles per assistant turn on average. This gives an average cost of $|\mathbf{P}_x| \times |\mathbf{I}^{\alpha}| \times n = 2.83 \times 16 \times 5 \approx 226$ LLM scoring calls per aspect per assistant turn.
 
-This cost partly reflects the implementation. As discussed in the [FAQ](faq.md#what-is-equation-1-doing-does-face-run-the-same-prompt-multiple-times), $\mathcal{S}_{particle}(I^\alpha, p)$ was approximated by rerunning mulitiple prompts as SGLang did not expose the needed token probabilities at the time of the experiment; with such probabilities, the repeated calls can be replaced by a token-probability-weighted estimate.
+This cost partly reflects the implementation. As discussed in the [FAQ](faq.md#what-is-equation-1-doing-does-face-run-the-same-prompt-multiple-times), $\mathcal{S}_{particle}(I^\alpha, p)$ was approximated by rerunning mulitiple prompts as the inference library we used, SGLang, did not expose the needed token probabilities at the time of the experiment; with such probabilities, the repeated calls can be replaced by a token-probability-weighted estimate.
 
 ## References
 
