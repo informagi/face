@@ -18,7 +18,7 @@ Specifically, the repository contains:
 ## What is CRSArena-Eval and FACE?
 
 - **CRSArena-Eval** is a meta-evaluation dataset of human-annotated conversations between users and 9 Conversational Recommender Systems (CRSs), designed for evaluating CRS evaluators.
-- **FACE** is a **Fine-grained, Aspect-based Conversation Evaluation** method that provides evaluation scores for diverse turn and dialogue level qualities of recommendation conversations.
+- **FACE** FACE is a **user-centric** conversation evaluation method focuses **beyond factuality**.
 
 ## CRSArena-Eval Dataset Release (`dataset/`)
 
