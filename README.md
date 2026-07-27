@@ -12,6 +12,7 @@ This is the repo for the paper: **[FACE: A Fine-Grained Reference-Free Evaluator
 Specifically, the repository contains:  
 - The [**`CRSArena-Eval dataset`**](dataset/) with human-annotated conversations and meta-evaluation scripts.
 - The [**`CRSArena-Eval interface`**](interface/) for interactive meta-evaluation of your evaluator vs. baselines.
+- The [**`Evaluation Aspect Survey`**](survey/) compares conversational-system evaluation aspects across the literature.
 - The [**`FACE`**](face/) implementation with particle generation and scoring tools.
 
 ## What is CRSArena-Eval and FACE?
@@ -100,6 +101,11 @@ See [`interface/README.md`](interface/README.md) for detailed instructions on ho
 We also provide a python script to evaluate your evaluator on the CRSArena-Eval dataset.
 
 👉 For detailed run file format and evaluation instructions, see [`dataset/run/README.md`](dataset/run/README.md).
+
+## Aspect Survey (`survey/`)
+
+Browse the survey at
+[`https://informagi.github.io/face/survey/`](https://informagi.github.io/face/survey/).
 
 ## Citation
 

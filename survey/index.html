@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aspect Survey</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root {
+      --bg: #f6f0e7;
+      --bg-soft: #fcfaf6;
+      --panel: rgba(255, 255, 255, 0.9);
+      --panel-strong: #ffffff;
+      --ink: #192537;
+      --muted: #607086;
+      --line: #d8dde5;
+      --accent: #0f766e;
+      --accent-soft: #dff4ee;
+      --accent-warm: #f2a65a;
+      --shadow: 0 18px 50px rgba(25, 37, 55, 0.09);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, 0.12), transparent 26%),
+        radial-gradient(circle at top right, rgba(242, 166, 90, 0.14), transparent 24%),
+        linear-gradient(180deg, #f8f3eb 0%, #f6f0e7 38%, #f8f7f4 100%);
+    }
+    main {
+      width: min(calc(100% - 32px), 1640px);
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+    h1 {
+      margin: 0 0 12px;
+      font-family: "Fraunces", serif;
+      letter-spacing: -0.03em;
+    }
+    h1 {
+      max-width: 24ch;
+      font-size: clamp(2rem, 4vw, 3.35rem);
+      line-height: 1.04;
+    }
+    p { margin: 0; line-height: 1.6; }
+    .hero,
+    .table-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+      border: 1px solid rgba(216, 221, 229, 0.95);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero {
+      padding: 28px 30px;
+      margin-bottom: 22px;
+    }
+    .paper-meta {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .paper-title {
+      color: var(--ink);
+      font-weight: 700;
+    }
+    .paper-meta a {
+      color: var(--accent);
+      font-weight: 700;
+      text-underline-offset: 3px;
+    }
+    .table-card {
+      padding: 18px;
+    }
+    .view-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+    .view-heading {
+      font-family: "Fraunces", serif;
+      font-size: 1.45rem;
+      letter-spacing: -0.025em;
+    }
+    .view-switcher {
+      display: inline-flex;
+      flex: 0 0 auto;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #f1f5f4;
+    }
+    .view-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 40px;
+      padding: 0 15px;
+      border: 0;
+      border-radius: 10px;
+      color: var(--muted);
+      background: transparent;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+    }
+    .view-button:hover {
+      color: var(--ink);
+    }
+    .view-button[aria-selected="true"] {
+      color: var(--accent);
+      background: #ffffff;
+      box-shadow: 0 4px 14px rgba(25, 37, 55, 0.1);
+    }
+    .view-button:active {
+      transform: translateY(1px);
+    }
+    .view-button:focus-visible {
+      outline: 3px solid rgba(15, 118, 110, 0.2);
+      outline-offset: 2px;
+    }
+    .view-button svg {
+      width: 17px;
+      height: 17px;
+      stroke: currentColor;
+    }
+    .view-panel[hidden] {
+      display: none;
+    }
+    .table-wrap {
+      overflow: auto;
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+    table {
+      border-collapse: separate;
+      border-spacing: 0;
+      width: max-content;
+      min-width: 100%;
+      background: var(--panel-strong);
+    }
+    th,
+    td {
+      padding: 10px 12px;
+      font-size: 13px;
+      line-height: 1.45;
+      vertical-align: top;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    thead th {
+      background: rgba(246, 248, 251, 0.96);
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      color: #3b495e;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.72rem;
+    }
+    tr:last-child td {
+      border-bottom: 0;
+    }
+    thead th:last-child,
+    tbody td:last-child {
+      border-right: 0;
+    }
+    tbody td {
+      background: #ffffff;
+    }
+    tbody tr:nth-child(even) td {
+      background: #fcfcfb;
+    }
+    tbody tr:hover td {
+      background: #f4faf8;
+    }
+    .col-no {
+      min-width: 64px;
+      width: 64px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .col-aspect {
+      min-width: 196px;
+      width: 196px;
+      font-weight: 600;
+    }
+    .col-explanation {
+      min-width: 378px;
+      width: 378px;
+      color: #344256;
+    }
+    .sticky-1,
+    .sticky-2,
+    .sticky-3 {
+      position: sticky;
+      background: #ffffff;
+      z-index: 2;
+    }
+    tbody tr:nth-child(even) .sticky-1,
+    tbody tr:nth-child(even) .sticky-2,
+    tbody tr:nth-child(even) .sticky-3 {
+      background: #fcfcfb;
+    }
+    tbody tr:hover .sticky-1,
+    tbody tr:hover .sticky-2,
+    tbody tr:hover .sticky-3 {
+      background: #f4faf8;
+    }
+    thead .sticky-1,
+    thead .sticky-2,
+    thead .sticky-3 {
+      background: rgba(246, 248, 251, 0.96);
+      z-index: 4;
+    }
+    .sticky-1 {
+      left: 0;
+      box-shadow: 1px 0 0 var(--line);
+    }
+    .sticky-2 {
+      left: 64px;
+      box-shadow: 1px 0 0 var(--line);
+    }
+    .sticky-3 {
+      left: 260px;
+      box-shadow: 1px 0 0 var(--line);
+    }
+    .citation-head {
+      width: 58px;
+      min-width: 58px;
+      height: 198px;
+      padding: 0;
+      vertical-align: bottom;
+      position: sticky;
+      top: 0;
+      text-align: center;
+    }
+    .citation-head > a {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transform: translate(-50%, -50%) rotate(-90deg);
+      transform-origin: center center;
+      white-space: nowrap;
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: 0.02em;
+      padding: 5px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 11px;
+      text-decoration: none;
+    }
+    .citation-head > a:hover,
+    .citation-head > a:focus-visible {
+      background: var(--accent);
+      color: #ffffff;
+    }
+    .citation-head > a:focus-visible {
+      outline: 3px solid rgba(15, 118, 110, 0.24);
+      outline-offset: 3px;
+    }
+    .citation-cell {
+      position: relative;
+      width: 58px;
+      min-width: 58px;
+      padding: 8px 4px;
+      text-align: center;
+      color: #425062;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .citation-cell.has-detail {
+      cursor: help;
+      font-weight: 400;
+    }
+    .detail-mark {
+      margin-left: 2px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      vertical-align: super;
+      line-height: 0;
+    }
+    .missing-definition {
+      position: relative;
+      display: inline-block;
+      margin-right: 4px;
+      cursor: help;
+    }
+    .missing-definition::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      bottom: calc(100% + 3px);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid #2b2b2b;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.16s ease;
+      z-index: 9;
+    }
+    .missing-definition::after {
+      content: attr(data-note);
+      position: absolute;
+      left: 0;
+      bottom: calc(100% + 10px);
+      width: 230px;
+      padding: 7px 9px;
+      border: 1px solid #111111;
+      color: #ffffff;
+      background: #2b2b2b;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11.5px;
+      font-weight: 400;
+      line-height: 1.45;
+      text-align: left;
+      white-space: normal;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.16s ease;
+      z-index: 10;
+    }
+    .missing-definition:hover::before,
+    .missing-definition:hover::after,
+    .missing-definition:focus-visible::before,
+    .missing-definition:focus-visible::after {
+      opacity: 1;
+    }
+    .missing-definition:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .citation-cell.has-detail::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 3px);
+      transform: translateX(-50%);
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid #192537;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.16s ease;
+      z-index: 7;
+    }
+    .citation-cell.has-detail::after {
+      content: attr(data-note);
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 10px);
+      transform: translateX(-50%);
+      min-width: 140px;
+      max-width: 240px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: #192537;
+      color: #ffffff;
+      box-shadow: 0 14px 30px rgba(25, 37, 55, 0.22);
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.45;
+      text-align: left;
+      white-space: normal;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.16s ease;
+      z-index: 8;
+    }
+    .citation-cell.has-detail:hover::before,
+    .citation-cell.has-detail:hover::after,
+    .citation-cell.has-detail:focus-visible::before,
+    .citation-cell.has-detail:focus-visible::after {
+      opacity: 1;
+    }
+    .citation-cell.has-detail:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: -2px;
+    }
+    .graph-panel {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 85% 10%, rgba(15, 118, 110, 0.08), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, #fbfdfc 100%);
+    }
+    .graph-summary {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 22px 24px 18px;
+      border-bottom: 1px solid #e7ecea;
+    }
+    .graph-title {
+      margin: 0 0 4px;
+      font-family: "Fraunces", serif;
+      font-size: 1.35rem;
+      letter-spacing: -0.025em;
+    }
+    .graph-description {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .graph-stats {
+      display: flex;
+      flex: 0 0 auto;
+      gap: 10px;
+    }
+    .graph-stat {
+      min-width: 108px;
+      padding: 10px 13px;
+      border: 1px solid #dce6e3;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.82);
+    }
+    .graph-stat strong {
+      display: block;
+      color: var(--accent);
+      font-size: 1.25rem;
+      line-height: 1.1;
+    }
+    .graph-stat span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 13px 24px 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .legend-swatch {
+      width: 11px;
+      height: 11px;
+      border-radius: 4px;
+      background: #8ac9bd;
+    }
+    .chart-scroll {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 2px 10px 6px;
+      scrollbar-color: #a9c9c2 #edf3f1;
+      scrollbar-width: thin;
+    }
+    .mention-chart {
+      display: block;
+      height: 590px;
+      overflow: visible;
+    }
+    .chart-grid {
+      stroke: #dfe8e5;
+      stroke-width: 1;
+      stroke-dasharray: 3 5;
+    }
+    .chart-axis {
+      stroke: #9eafa9;
+      stroke-width: 1.2;
+    }
+    .chart-tick,
+    .chart-axis-label,
+    .chart-aspect-label,
+    .chart-value {
+      font-family: "Space Grotesk", sans-serif;
+    }
+    .chart-tick {
+      fill: #718078;
+      font-size: 11px;
+    }
+    .chart-axis-label {
+      fill: #53645e;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .chart-aspect-label {
+      fill: #4c5c57;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .chart-bar {
+      fill: #8ac9bd;
+      transition: filter 0.18s ease, opacity 0.18s ease;
+    }
+    .chart-value {
+      fill: #354843;
+      font-size: 11px;
+      font-weight: 700;
+      text-anchor: middle;
+    }
+    .chart-bar-group {
+      outline: none;
+    }
+    .chart-bar-group:hover .chart-bar,
+    .chart-bar-group:focus .chart-bar {
+      filter: brightness(0.9) saturate(1.15);
+    }
+    .chart-bar-group:hover .chart-value,
+    .chart-bar-group:focus .chart-value {
+      fill: var(--accent);
+    }
+    @media (max-width: 900px) {
+      main { width: min(calc(100% - 20px), 1640px); padding: 16px 0 32px; }
+      .hero,
+      .table-card {
+        padding: 16px;
+        border-radius: 18px;
+      }
+      .view-toolbar,
+      .graph-summary {
+        align-items: stretch;
+        flex-direction: column;
+      }
+      .view-switcher {
+        width: 100%;
+      }
+      .view-button {
+        flex: 1;
+        justify-content: center;
+      }
+      .graph-summary {
+        gap: 16px;
+        padding: 18px;
+      }
+      .graph-stats {
+        width: 100%;
+      }
+      .col-explanation {
+        min-width: 252px;
+        width: 252px;
+      }
+      .graph-stat {
+        flex: 1;
+        min-width: 0;
+      }
+      .chart-legend {
+        padding: 12px 18px 0;
+      }
+      .sticky-1, .sticky-2 { position: static; }
+      .col-no { min-width: 56px; width: 56px; }
+      .col-aspect { min-width: 154px; width: 154px; }
+      .citation-head {
+        width: 52px;
+        min-width: 52px;
+        height: 182px;
+      }
+      .citation-cell {
+        width: 52px;
+        min-width: 52px;
+      }
+    }
+
+    /* Restrained academic-archive theme */
+    :root {
+      --bg: #f1f1ee;
+      --bg-soft: #f7f7f4;
+      --panel: #ffffff;
+      --panel-strong: #ffffff;
+      --ink: #202020;
+      --muted: #5f5f5b;
+      --line: #d2d2cc;
+      --accent: #8b1e2d;
+      --accent-soft: #f3e8e9;
+      --accent-warm: #8b1e2d;
+      --shadow: none;
+      --radius: 0;
+    }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    main {
+      width: min(calc(100% - 40px), 1540px);
+      padding: 22px 0 44px;
+    }
+    h1,
+    .view-heading,
+    .graph-title {
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: 0;
+    }
+    h1 {
+      max-width: none;
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.1;
+    }
+    .hero,
+    .table-card {
+      background: var(--panel);
+      border: 1px solid #c8c8c2;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .hero {
+      position: relative;
+      margin-bottom: 16px;
+      padding: 27px 30px 25px;
+      border-top: 6px solid var(--accent);
+    }
+    .paper-overview {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.8fr);
+      margin-top: 14px;
+      border-top: 1px solid #c8c8c2;
+      border-bottom: 1px solid #c8c8c2;
+    }
+    .paper-citation,
+    .survey-summary {
+      padding: 10px 18px;
+    }
+    .paper-citation {
+      padding-left: 0;
+    }
+    .survey-summary {
+      border-left: 1px solid #d5d5d0;
+      background: #f7f7f4;
+    }
+    .paper-byline {
+      margin-top: 4px;
+      color: #4f4f4b;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+    .paper-label {
+      display: block;
+      margin: 0 0 5px;
+      color: var(--accent);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
+    }
+    .paper-title {
+      margin: 0;
+      color: #252525;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .paper-byline a {
+      color: var(--accent);
+      font-weight: 400;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .survey-description {
+      margin: 0;
+      color: #4f4f4b;
+      font-size: 0.92rem;
+      line-height: 1.55;
+    }
+    .survey-check-mark {
+      color: #333333;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1;
+      vertical-align: -1px;
+    }
+    .table-card {
+      padding: 20px;
+    }
+    .view-toolbar {
+      margin: -2px 0 18px;
+      padding: 0 0 11px;
+      border-bottom: 1px solid #bababa;
+    }
+    .view-heading {
+      margin: 0;
+      color: #222222;
+      font-size: 1.35rem;
+      font-weight: 400;
+    }
+    .view-switcher {
+      gap: 0;
+      padding: 0;
+      border: 1px solid #a9a9a4;
+      border-radius: 0;
+      background: #f4f4f1;
+    }
+    .view-button {
+      min-height: 34px;
+      gap: 6px;
+      padding: 0 14px;
+      border-radius: 0;
+      color: #4d4d49;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: none;
+    }
+    .view-button + .view-button {
+      border-left: 1px solid #bdbdb8;
+    }
+    .view-button:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    .view-button[aria-selected="true"] {
+      color: #ffffff;
+      background: var(--accent);
+      box-shadow: none;
+    }
+    .view-button[aria-selected="true"]:hover {
+      color: #ffffff;
+      text-decoration: none;
+    }
+    .view-button:active {
+      transform: none;
+    }
+    .view-button:focus-visible {
+      outline: 2px solid #222222;
+      outline-offset: 2px;
+    }
+    .view-button svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 1.6;
+    }
+    .table-wrap,
+    .graph-panel {
+      border: 1px solid #bdbdb8;
+      border-radius: 0;
+      background: #ffffff;
+    }
+    th,
+    td {
+      padding: 9px 10px;
+      border-color: #d6d6d1;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12.5px;
+      line-height: 1.42;
+    }
+    thead th,
+    thead .sticky-1,
+    thead .sticky-2,
+    thead .sticky-3 {
+      color: #333333;
+      background: #e9e9e5;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.055em;
+    }
+    thead .col-no,
+    thead .col-aspect,
+    thead .col-explanation {
+      text-align: center;
+      vertical-align: middle;
+    }
+    tbody td,
+    .sticky-1,
+    .sticky-2,
+    .sticky-3 {
+      background: #ffffff;
+    }
+    tbody tr:nth-child(even) td,
+    tbody tr:nth-child(even) .sticky-1,
+    tbody tr:nth-child(even) .sticky-2,
+    tbody tr:nth-child(even) .sticky-3 {
+      background: #f7f7f5;
+    }
+    tbody tr:hover td,
+    tbody tr:hover .sticky-1,
+    tbody tr:hover .sticky-2,
+    tbody tr:hover .sticky-3 {
+      background: #f2f0e8;
+    }
+    .col-no {
+      min-width: 52px;
+      width: 52px;
+      color: #555551;
+    }
+    .col-aspect {
+      min-width: 210px;
+      width: 210px;
+      font-weight: 700;
+    }
+    .aspect-alias {
+      color: #777773;
+      font-size: 0.82em;
+      font-weight: 400;
+    }
+    .col-explanation {
+      min-width: 390px;
+      width: 390px;
+      color: #3c3c39;
+    }
+    .col-explanation a {
+      color: #747470;
+      font-size: 0.88em;
+      font-weight: 400;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .col-explanation a:hover,
+    .col-explanation a:focus-visible {
+      color: #3f3f3c;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .sticky-2 {
+      left: 52px;
+    }
+    .sticky-3 {
+      left: 262px;
+    }
+    .citation-head {
+      width: 54px;
+      min-width: 54px;
+      height: 186px;
+      background: #e9e9e5;
+    }
+    .citation-head > a {
+      padding: 2px 0;
+      border-radius: 0;
+      color: var(--accent);
+      background: transparent;
+      font-size: 10.5px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .citation-head > a:hover,
+    .citation-head > a:focus-visible {
+      color: #5f101c;
+      background: transparent;
+      text-decoration: underline;
+    }
+    .citation-head > a:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+    .citation-cell {
+      width: 54px;
+      min-width: 54px;
+      padding: 8px 3px;
+      color: #333333;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+    }
+    tbody tr .citation-cell.has-check {
+      background: #f3e8e9;
+    }
+    tbody tr:hover .citation-cell.has-check {
+      background: #ead8db;
+    }
+    tbody tr .citation-cell.has-related {
+      background: #efefeb;
+    }
+    tbody tr:hover .citation-cell.has-related {
+      background: #e5e5df;
+    }
+    .detail-mark {
+      color: var(--accent);
+    }
+    .citation-cell.has-detail::before {
+      border-top-color: #2b2b2b;
+    }
+    .citation-cell.has-detail::after {
+      padding: 7px 9px;
+      border: 1px solid #111111;
+      border-radius: 0;
+      color: #ffffff;
+      background: #2b2b2b;
+      box-shadow: none;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11.5px;
+    }
+    .citation-cell.has-detail:focus-visible {
+      outline-color: var(--accent);
+    }
+    .graph-panel {
+      overflow: hidden;
+    }
+    .graph-summary {
+      gap: 20px;
+      padding: 18px 20px 15px;
+      border-bottom: 1px solid #cfcfca;
+      background: #f7f7f4;
+    }
+    .graph-title {
+      font-size: 1.25rem;
+      font-weight: 400;
+    }
+    .graph-description {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .graph-stats {
+      gap: 24px;
+    }
+    .graph-stat {
+      min-width: 102px;
+      padding: 3px 0 3px 12px;
+      border: 0;
+      border-left: 2px solid var(--accent);
+      border-radius: 0;
+      background: transparent;
+    }
+    .graph-stat strong {
+      color: #292929;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+    .graph-stat span {
+      color: #666662;
+      font-size: 0.65rem;
+      letter-spacing: 0.055em;
+    }
+    .chart-legend {
+      gap: 18px;
+      padding: 12px 20px 0;
+      color: #555551;
+      font-size: 0.74rem;
+      font-weight: 400;
+    }
+    .legend-swatch {
+      width: 12px;
+      height: 8px;
+      border-radius: 0;
+      background: #999994;
+    }
+    .chart-scroll {
+      padding: 2px 8px 5px;
+      scrollbar-color: #989893 #e6e6e2;
+    }
+    .chart-grid {
+      stroke: #ddddda;
+      stroke-dasharray: none;
+    }
+    .chart-axis {
+      stroke: #777773;
+      stroke-width: 1;
+    }
+    .chart-tick,
+    .chart-axis-label,
+    .chart-aspect-label,
+    .chart-value {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .chart-tick {
+      fill: #666662;
+    }
+    .chart-axis-label {
+      fill: #3f3f3c;
+      font-size: 11px;
+      letter-spacing: 0.035em;
+    }
+    .chart-aspect-label {
+      fill: #3f3f3c;
+      font-weight: 400;
+    }
+    .chart-aspect-alias {
+      fill: #777773;
+      font-size: 9px;
+      font-weight: 400;
+    }
+    .chart-bar {
+      fill: #969691;
+      rx: 1px;
+      transition: none;
+    }
+    .chart-bar-group {
+      cursor: help;
+    }
+    .chart-tooltip {
+      position: fixed;
+      z-index: 100;
+      width: min(340px, calc(100vw - 24px));
+      padding: 10px 12px;
+      border: 1px solid #777773;
+      color: #2d2d2a;
+      background: #fffffc;
+      box-shadow: 3px 3px 0 rgba(42, 42, 38, 0.12);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 1.45;
+      pointer-events: none;
+    }
+    .chart-tooltip[hidden] {
+      display: none;
+    }
+    .chart-tooltip-title {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .chart-value {
+      fill: #333330;
+      font-weight: 600;
+    }
+    .chart-bar-group:hover .chart-bar,
+    .chart-bar-group:focus .chart-bar {
+      filter: brightness(0.78);
+    }
+    .chart-bar-group:hover .chart-value,
+    .chart-bar-group:focus .chart-value {
+      fill: var(--accent);
+    }
+    @media (max-width: 900px) {
+      main {
+        width: min(calc(100% - 16px), 1540px);
+        padding: 8px 0 24px;
+      }
+      .hero,
+      .table-card {
+        padding: 16px;
+        border-radius: 0;
+      }
+      .hero {
+        padding-top: 20px;
+      }
+      .paper-overview {
+        grid-template-columns: 1fr;
+      }
+      .paper-citation,
+      .survey-summary {
+        padding: 10px 0;
+      }
+      .survey-summary {
+        border-top: 1px solid #d5d5d0;
+        border-left: 0;
+        background: transparent;
+      }
+      .view-toolbar {
+        margin-top: 0;
+      }
+      .sticky-1,
+      .sticky-2,
+      .sticky-3 {
+        position: static;
+      }
+      .col-no {
+        min-width: 48px;
+        width: 48px;
+      }
+      .col-aspect {
+        min-width: 172px;
+        width: 172px;
+      }
+      .col-explanation {
+        min-width: 280px;
+        width: 280px;
+      }
+      .citation-head,
+      .citation-cell {
+        width: 50px;
+        min-width: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <h1>Aspect Survey</h1>
+      <div class="paper-overview">
+        <section class="paper-citation" aria-labelledby="original-publication-title">
+          <p class="paper-label">Conducted as part of…</p>
+          <h2 class="paper-title" id="original-publication-title">FACE: A Fine-Grained Reference-Free Evaluator for Conversational Information Access</h2>
+          <p class="paper-byline">Hideaki Joko and Faegheh Hasibi · SIGIR 2026 full paper · <a href="https://arxiv.org/abs/2506.00314" target="_blank" rel="noopener">View paper</a></p>
+        </section>
+        <section class="survey-summary" aria-labelledby="survey-description-title">
+          <h2 class="paper-label" id="survey-description-title">About this survey</h2>
+          <p class="survey-description">This survey compares conversational-system evaluation aspects across the literature; a check mark (<span class="survey-check-mark" aria-hidden="true">✓</span>) indicates that a paper refers to an aspect.</p>
+        </section>
+      </div>
+    </section>
+    <section class="table-card" aria-labelledby="survey-heading">
+      <div class="view-toolbar">
+        <h2 class="view-heading" id="survey-heading">Evaluation aspect survey</h2>
+        <div class="view-switcher" role="tablist" aria-label="Survey view">
+          <button class="view-button" id="table-tab" type="button" role="tab" aria-selected="true" aria-controls="table-view" data-view="table">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="16" rx="2"></rect>
+              <path d="M3 9h18M9 4v16"></path>
+            </svg>
+            Table
+          </button>
+          <button class="view-button" id="graph-tab" type="button" role="tab" aria-selected="false" aria-controls="graph-view" data-view="graph" tabindex="-1">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path>
+            </svg>
+            Graph
+          </button>
+        </div>
+      </div>
+      <div class="view-panel" id="table-view" role="tabpanel" aria-labelledby="table-tab">
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-no sticky-1">No.</th>
+            <th class="col-aspect sticky-2">Aspect</th>
+            <th class="col-explanation sticky-3">Explanation</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      </div>
+      </div>
+      <div class="view-panel graph-panel" id="graph-view" role="tabpanel" aria-labelledby="graph-tab" tabindex="0" hidden>
+        <div class="graph-summary">
+          <div>
+            <h3 class="graph-title">Aspect mentions across surveyed papers</h3>
+            <p class="graph-description">Sorted from most to least mentioned. A mention includes either a ✓ or △ in the survey matrix.</p>
+          </div>
+        </div>
+        <div class="chart-scroll" id="chart-scroll">
+          <svg
+            class="mention-chart"
+            id="mention-chart"
+            role="img"
+            aria-label="Bar chart of surveyed-paper mentions for each evaluation aspect, sorted from most to least mentioned."
+          ></svg>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div class="chart-tooltip" id="chart-tooltip" role="tooltip" hidden></div>
+  <script src="survey-data.js"></script>
+  <script>
+    const surveyData = window.FACE_SURVEY_DATA;
+    if (!surveyData) {
+      throw new Error("Survey data failed to load from survey-data.js.");
+    }
+
+    const paperById = new Map(
+      surveyData.papers.map((paper) => [paper.id, paper])
+    );
+    const columnPapers = surveyData.columns.map((paperId) => {
+      const paper = paperById.get(paperId);
+      if (!paper?.columnLabel) {
+        throw new Error(`Unknown survey paper column: ${paperId}`);
+      }
+      return paper;
+    });
+    const tableBody = document.querySelector("#table-view tbody");
+    const tableHeaderRow = document.querySelector("#table-view thead tr");
+
+    function createPaperLink(citation) {
+      const paper = paperById.get(citation.paperId);
+      if (!paper) {
+        throw new Error(`Unknown explanation citation: ${citation.paperId}`);
+      }
+
+      const citationLabel = citation.label || paper.citation;
+      const link = document.createElement("a");
+      link.href = paper.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.textContent = `[${citationLabel}${citation.locator ? `, ${citation.locator}` : ""}]`;
+      link.title = `Open the paper cited as ${citationLabel}`;
+      return link;
+    }
+
+    function renderExplanation(cell, explanation) {
+      if (explanation.note) {
+        cell.classList.add("manual-explanation");
+        const missingDefinition = document.createElement("span");
+        missingDefinition.className = "missing-definition";
+        missingDefinition.dataset.note = explanation.note;
+        missingDefinition.setAttribute("aria-label", explanation.note);
+        missingDefinition.tabIndex = 0;
+        missingDefinition.append(document.createTextNode("—"));
+
+        const detailMark = document.createElement("sup");
+        detailMark.className = "detail-mark";
+        detailMark.textContent = "*";
+        missingDefinition.append(detailMark);
+        cell.append(missingDefinition);
+      } else if (explanation.text) {
+        cell.append(document.createTextNode(explanation.text));
+      }
+
+      explanation.citations.forEach((citation, index) => {
+        if (cell.childNodes.length || index > 0) {
+          cell.append(document.createTextNode(" "));
+        }
+        cell.append(createPaperLink(citation));
+      });
+    }
+
+    function renderSurveyTable() {
+      columnPapers.forEach((paper) => {
+        const header = document.createElement("th");
+        header.className = "citation-head";
+
+        const link = document.createElement("a");
+        link.href = paper.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.title = paper.title;
+        link.textContent = paper.columnLabel;
+        header.append(link);
+        tableHeaderRow.append(header);
+      });
+
+      surveyData.aspects
+        .slice()
+        .sort((first, second) => first.number - second.number)
+        .forEach((item) => {
+          const row = document.createElement("tr");
+
+          const numberCell = document.createElement("td");
+          numberCell.className = "col-no sticky-1";
+          numberCell.textContent = item.number;
+          row.append(numberCell);
+
+          const aspectCell = document.createElement("td");
+          aspectCell.className = "col-aspect sticky-2";
+          aspectCell.append(document.createTextNode(item.aspect));
+          if (item.aliases.length) {
+            const aliases = document.createElement("span");
+            aliases.className = "aspect-alias";
+            aliases.textContent = ` (${item.aliases.join(", ")})`;
+            aspectCell.append(aliases);
+          }
+          row.append(aspectCell);
+
+          const explanationCell = document.createElement("td");
+          explanationCell.className = "col-explanation sticky-3";
+          renderExplanation(explanationCell, item.explanation);
+          row.append(explanationCell);
+
+          columnPapers.forEach((paper) => {
+            const mention = item.paperMentions[paper.id];
+            const mentionCell = document.createElement("td");
+            mentionCell.className = "citation-cell";
+            if (mention) {
+              const mark = mention.mark === "related" ? "△" : "✓";
+              mentionCell.textContent = `${mark}${mention.term ? ` (${mention.term})` : ""}`;
+            }
+            row.append(mentionCell);
+          });
+
+          tableBody.append(row);
+        });
+    }
+
+    renderSurveyTable();
+
+    const surveyPaperHeaders = Array.from(
+      document.querySelectorAll("#table-view .citation-head")
+    );
+    const surveyPaperRows = Array.from(tableBody.querySelectorAll("tr"));
+    const rankedPapers = surveyPaperHeaders.map((header, originalIndex) => {
+      const mentions = surveyPaperRows.reduce((count, row) => {
+        const cell = row.querySelectorAll(".citation-cell")[originalIndex];
+        return count + (/[✓△]/u.test(cell?.textContent || "") ? 1 : 0);
+      }, 0);
+
+      return { header, originalIndex, mentions };
+    }).sort((first, second) =>
+      second.mentions - first.mentions || first.originalIndex - second.originalIndex
+    );
+
+    const paperHeaderRow = document.querySelector("#table-view thead tr");
+    rankedPapers.forEach(({ header }) => paperHeaderRow.append(header));
+    surveyPaperRows.forEach((row) => {
+      const cells = Array.from(row.querySelectorAll(".citation-cell"));
+      rankedPapers.forEach(({ originalIndex }) => row.append(cells[originalIndex]));
+    });
+
+    const surveyRows = Array.from(tableBody.querySelectorAll("tr"));
+    const paperCount = document.querySelectorAll(".citation-head").length;
+    const rankedAspects = surveyRows.map((row) => {
+      const aspectCell = row.querySelector(".col-aspect");
+      const aspect = aspectCell.textContent.trim();
+      const aliasElement = aspectCell.querySelector(".aspect-alias");
+      const aspectPrimary = aliasElement
+        ? aspectCell.firstChild.textContent.trim()
+        : aspect;
+      const aspectAlias = aliasElement?.textContent.trim() || "";
+      const mentions = Array.from(row.querySelectorAll(".citation-cell"))
+        .filter((cell) => /[✓△]/u.test(cell.textContent))
+        .length;
+
+      return {
+        row,
+        aspect,
+        aspectPrimary,
+        aspectAlias,
+        mentions,
+        explanation: row.querySelector(".col-explanation").textContent.trim(),
+        originalOrder: Number(row.querySelector(".col-no").textContent.trim()),
+      };
+    }).sort((first, second) =>
+      second.mentions - first.mentions || first.originalOrder - second.originalOrder
+    );
+
+    rankedAspects.forEach(({ row }, index) => {
+      row.querySelector(".col-no").textContent = index + 1;
+      tableBody.append(row);
+    });
+    const aspectData = rankedAspects.map(({ aspect, aspectPrimary, aspectAlias, mentions, explanation }) => ({
+      aspect,
+      aspectPrimary,
+      aspectAlias,
+      mentions,
+      explanation
+    }));
+
+    const viewButtons = Array.from(document.querySelectorAll(".view-button"));
+    const viewPanels = {
+      table: document.querySelector("#table-view"),
+      graph: document.querySelector("#graph-view")
+    };
+
+    function activateView(viewName, shouldFocus = false) {
+      viewButtons.forEach((button) => {
+        const isActive = button.dataset.view === viewName;
+        button.setAttribute("aria-selected", String(isActive));
+        button.tabIndex = isActive ? 0 : -1;
+        if (isActive && shouldFocus) {
+          button.focus();
+        }
+      });
+
+      Object.entries(viewPanels).forEach(([name, panel]) => {
+        panel.hidden = name !== viewName;
+      });
+    }
+
+    viewButtons.forEach((button, index) => {
+      button.addEventListener("click", () => {
+        activateView(button.dataset.view);
+      });
+
+      button.addEventListener("keydown", (event) => {
+        let targetIndex = index;
+        if (event.key === "ArrowRight") {
+          targetIndex = (index + 1) % viewButtons.length;
+        } else if (event.key === "ArrowLeft") {
+          targetIndex = (index - 1 + viewButtons.length) % viewButtons.length;
+        } else if (event.key === "Home") {
+          targetIndex = 0;
+        } else if (event.key === "End") {
+          targetIndex = viewButtons.length - 1;
+        } else {
+          return;
+        }
+
+        event.preventDefault();
+        activateView(viewButtons[targetIndex].dataset.view, true);
+      });
+    });
+    activateView("table");
+
+    const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
+
+    function createSvgElement(tagName, attributes = {}, text = "") {
+      const element = document.createElementNS(SVG_NAMESPACE, tagName);
+      Object.entries(attributes).forEach(([name, value]) => {
+        element.setAttribute(name, String(value));
+      });
+      if (text) {
+        element.textContent = text;
+      }
+      return element;
+    }
+
+    function wrapLabel(label, maximumLength = 22) {
+      const words = label.split(/\s+/u);
+      const lines = [];
+      let currentLine = "";
+
+      words.forEach((word) => {
+        const nextLine = currentLine ? `${currentLine} ${word}` : word;
+        if (nextLine.length > maximumLength && currentLine) {
+          lines.push(currentLine);
+          currentLine = word;
+        } else {
+          currentLine = nextLine;
+        }
+      });
+
+      if (currentLine) {
+        lines.push(currentLine);
+      }
+      return lines;
+    }
+
+    const chartTooltip = document.querySelector("#chart-tooltip");
+
+    function positionChartTooltip(clientX, clientY) {
+      const margin = 12;
+      const offset = 14;
+      const tooltipRect = chartTooltip.getBoundingClientRect();
+      let left = clientX + offset;
+      let top = clientY + offset;
+
+      if (left + tooltipRect.width > window.innerWidth - margin) {
+        left = clientX - tooltipRect.width - offset;
+      }
+      if (top + tooltipRect.height > window.innerHeight - margin) {
+        top = clientY - tooltipRect.height - offset;
+      }
+
+      chartTooltip.style.left = `${Math.max(margin, left)}px`;
+      chartTooltip.style.top = `${Math.max(margin, top)}px`;
+    }
+
+    function showChartTooltip(item, clientX, clientY) {
+      const title = document.createElement("span");
+      title.className = "chart-tooltip-title";
+      title.textContent = item.aspect;
+      const explanation = document.createElement("span");
+      explanation.textContent = item.explanation || "No explanation provided.";
+      chartTooltip.replaceChildren(title, explanation);
+      chartTooltip.hidden = false;
+      positionChartTooltip(clientX, clientY);
+    }
+
+    function hideChartTooltip() {
+      chartTooltip.hidden = true;
+    }
+
+    function renderMentionChart(data) {
+      const chart = document.querySelector("#mention-chart");
+      const slotWidth = 58;
+      const barWidth = 25;
+      const plotLeft = 72;
+      const plotTop = 44;
+      const plotHeight = 330;
+      const plotBottom = plotTop + plotHeight;
+      const plotWidth = data.length * slotWidth;
+      const chartWidth = plotLeft + plotWidth + 220;
+      const chartHeight = 590;
+      const highestCount = Math.max(...data.map((item) => item.mentions));
+      const yMaximum = Math.max(5, Math.ceil(highestCount / 5) * 5);
+      const tickIntervals = 5;
+
+      chart.setAttribute("viewBox", `0 0 ${chartWidth} ${chartHeight}`);
+      chart.setAttribute("width", chartWidth);
+      chart.setAttribute("height", chartHeight);
+
+      for (let index = 0; index <= tickIntervals; index += 1) {
+        const value = (yMaximum / tickIntervals) * index;
+        const y = plotBottom - (value / yMaximum) * plotHeight;
+        chart.append(createSvgElement("line", {
+          class: "chart-grid",
+          x1: plotLeft,
+          x2: plotLeft + plotWidth,
+          y1: y,
+          y2: y
+        }));
+        chart.append(createSvgElement("text", {
+          class: "chart-tick",
+          x: plotLeft - 13,
+          y: y + 4,
+          "text-anchor": "end"
+        }, value));
+      }
+
+      chart.append(createSvgElement("line", {
+        class: "chart-axis",
+        x1: plotLeft,
+        x2: plotLeft,
+        y1: plotTop,
+        y2: plotBottom
+      }));
+      chart.append(createSvgElement("line", {
+        class: "chart-axis",
+        x1: plotLeft,
+        x2: plotLeft + plotWidth,
+        y1: plotBottom,
+        y2: plotBottom
+      }));
+      chart.append(createSvgElement("text", {
+        class: "chart-axis-label",
+        x: 19,
+        y: plotTop + plotHeight / 2,
+        transform: `rotate(-90 19 ${plotTop + plotHeight / 2})`,
+        "text-anchor": "middle"
+      }, "Number of papers"));
+      chart.append(createSvgElement("text", {
+        class: "chart-axis-label",
+        x: plotLeft + plotWidth / 2,
+        y: chartHeight - 16,
+        "text-anchor": "middle"
+      }, "Aspect"));
+
+      data.forEach((item, index) => {
+        const xCenter = plotLeft + index * slotWidth + slotWidth / 2;
+        const naturalBarHeight = (item.mentions / yMaximum) * plotHeight;
+        const barHeight = item.mentions === 0 ? 3 : naturalBarHeight;
+        const barY = plotBottom - barHeight;
+        const group = createSvgElement("g", {
+          class: "chart-bar-group",
+          tabindex: "0",
+          role: "img",
+          "aria-label": `${item.aspect}: mentioned in ${item.mentions} of ${paperCount} papers. Explanation: ${item.explanation || "No explanation provided."}`
+        });
+        group.addEventListener("pointerenter", (event) => {
+          showChartTooltip(item, event.clientX, event.clientY);
+        });
+        group.addEventListener("pointermove", (event) => {
+          positionChartTooltip(event.clientX, event.clientY);
+        });
+        group.addEventListener("pointerleave", hideChartTooltip);
+        group.addEventListener("focus", () => {
+          const rect = group.getBoundingClientRect();
+          showChartTooltip(item, rect.left + rect.width / 2, rect.top);
+        });
+        group.addEventListener("blur", hideChartTooltip);
+        group.append(createSvgElement("rect", {
+          class: "chart-bar",
+          x: xCenter - barWidth / 2,
+          y: barY,
+          width: barWidth,
+          height: barHeight,
+          rx: Math.min(7, barHeight / 2),
+          opacity: item.mentions === 0 ? 0.32 : 1
+        }));
+        group.append(createSvgElement("text", {
+          class: "chart-value",
+          x: xCenter,
+          y: barY - 8
+        }, item.mentions));
+
+        const label = createSvgElement("text", {
+          class: "chart-aspect-label",
+          x: xCenter - 3,
+          y: plotBottom + 20,
+          transform: `rotate(52 ${xCenter - 3} ${plotBottom + 20})`
+        });
+        const labelLines = [
+          ...wrapLabel(item.aspectPrimary).map((line) => ({ line, isAlias: false })),
+          ...wrapLabel(item.aspectAlias).map((line) => ({ line, isAlias: true }))
+        ];
+        labelLines.forEach(({ line, isAlias }, lineIndex) => {
+          label.append(createSvgElement("tspan", {
+            class: isAlias ? "chart-aspect-alias" : "",
+            x: xCenter - 3,
+            dy: lineIndex === 0 ? 0 : (isAlias ? 12 : 13)
+          }, line));
+        });
+        group.append(label);
+        chart.append(group);
+      });
+
+    }
+
+    document.querySelectorAll(".citation-cell").forEach((cell) => {
+      const text = cell.textContent.trim();
+      cell.textContent = text;
+      cell.classList.toggle("has-check", text.includes("✓"));
+      cell.classList.toggle("has-related", text.includes("△"));
+      const noteStart = text.indexOf(" (");
+      if (noteStart === -1 || !text.endsWith(")")) {
+        return;
+      }
+
+      const primary = text.slice(0, noteStart).trim();
+      const note = text.slice(noteStart + 2, -1).trim();
+      if (!primary || !note) {
+        return;
+      }
+
+      cell.textContent = "";
+      cell.append(document.createTextNode(primary));
+      const mark = document.createElement("sup");
+      mark.className = "detail-mark";
+      mark.textContent = "*";
+      cell.append(mark);
+      const noteDescription = primary.includes("△")
+        ? `The paper discusses a related aspect termed “${note}”.`
+        : `The paper refers to this aspect as “${note}”.`;
+      cell.dataset.note = noteDescription;
+      cell.setAttribute("aria-label", noteDescription);
+      cell.tabIndex = 0;
+      cell.classList.add("has-detail");
+    });
+
+    renderMentionChart(aspectData);
+  </script>
+</body>
+</html>
