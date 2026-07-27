@@ -102,7 +102,7 @@ We also provide a python script to evaluate your evaluator on the CRSArena-Eval 
 
 👉 For detailed run file format and evaluation instructions, see [`dataset/run/README.md`](dataset/run/README.md).
 
-## Aspect Survey (`survey/`)
+## Evaluation Aspect Survey (`survey/`)
 
 Browse the survey at
 [`https://informagus.nl/face/survey/`](https://informagus.nl/face/survey/).
