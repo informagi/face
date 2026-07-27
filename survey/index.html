@@ -647,6 +647,10 @@
       background: #f7f7f4;
     }
     .paper-byline {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 10px;
       margin-top: 4px;
       color: #4f4f4b;
       font-family: Arial, Helvetica, sans-serif;
@@ -672,10 +676,17 @@
       line-height: 1.35;
     }
     .paper-byline a {
-      color: var(--accent);
-      font-weight: 400;
-      text-decoration: underline;
-      text-underline-offset: 2px;
+      display: inline-flex;
+      text-decoration: none;
+    }
+    .paper-links {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .paper-links img {
+      display: block;
+      height: 18px;
     }
     .survey-description {
       margin: 0;
@@ -1095,7 +1106,17 @@
         <section class="paper-citation" aria-labelledby="original-publication-title">
           <p class="paper-label">Conducted as part of…</p>
           <h2 class="paper-title" id="original-publication-title">FACE: A Fine-Grained Reference-Free Evaluator for Conversational Information Access</h2>
-          <p class="paper-byline">Hideaki Joko and Faegheh Hasibi · SIGIR 2026 full paper · <a href="https://arxiv.org/abs/2506.00314" target="_blank" rel="noopener">View paper</a></p>
+          <p class="paper-byline">
+            <span>Hideaki Joko and Faegheh Hasibi · SIGIR 2026 full paper</span>
+            <span class="paper-links" aria-label="Paper links">
+              <a href="https://arxiv.org/abs/2506.00314" target="_blank" rel="noopener" aria-label="Read the FACE paper on arXiv">
+                <img src="https://img.shields.io/badge/arXiv-b5212f.svg?logo=arxiv&amp;logoColor=white" alt="arXiv">
+              </a>
+              <a href="https://github.com/informagi/face" target="_blank" rel="noopener" aria-label="View the FACE repository on GitHub">
+                <img src="https://img.shields.io/badge/GitHub-181717.svg?logo=github&amp;logoColor=white" alt="GitHub">
+              </a>
+            </span>
+          </p>
         </section>
         <section class="survey-summary" aria-labelledby="survey-description-title">
           <h2 class="paper-label" id="survey-description-title">About this survey</h2>
