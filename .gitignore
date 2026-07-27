@@ -4,6 +4,3 @@
 .env
 **/results
 /tmp
-**/survey
-!/survey/
-!/survey/**
