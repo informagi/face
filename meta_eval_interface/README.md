@@ -4,15 +4,15 @@ An interactive web-based evaluation tool for CRS Arena benchmarks. Upload your r
 
 **Run locally:**
 
-Navigate to the `interface` directory and start a simple HTTP server (CORS restrictions prevent direct file opening). Then open `http://localhost:8000` in your browser.
+Navigate to the `meta_eval_interface` directory and start a simple HTTP server (CORS restrictions prevent direct file opening). Then open `http://localhost:8000` in your browser.
 
 ```bash
-cd interface
+cd meta_eval_interface
 python3 -m http.server 8000
 ```
 
 The public interface is hosted at
-[`https://informagi.github.io/face/interface/`](https://informagi.github.io/face/interface/).
+[`https://informagi.github.io/face/meta_eval_interface/`](https://informagi.github.io/face/meta_eval_interface/).
 
 For run file format, see: [`dataset/run/README.md`](../dataset/run/README.md)
 

@@ -12,7 +12,7 @@ This is the repo for the paper: **[FACE: A Fine-Grained Reference-Free Evaluator
 Specifically, the repository contains:  
 - [**`CRSArena-Eval dataset`**](dataset/) with human-annotated conversations and meta-evaluation scripts.
 - [**`CRSArena-Eval annotation interface`**](annotation_interface/) used to collect human judgments.
-- [**`CRSArena-Eval meta-evaluation interface`**](interface/) for interactive meta-evaluation of your evaluator vs. baselines.
+- [**`CRSArena-Eval meta-evaluation interface`**](meta_eval_interface/) for interactive meta-evaluation of your evaluator vs. baselines.
 - [**`Evaluation aspect survey`**](https://informagus.nl/face/survey/) compares conversational-system evaluation aspects across the literature.
 - [**`FACE`**](face/) implementation with particle generation and scoring tools.
 
@@ -90,12 +90,12 @@ The [`face/`](face/) directory contains the implementation of the FACE evaluatio
 👉 For detailed usage, LLM setup, and available aspects, see [`face/README.md`](face/README.md).  
 👉 For notation, particles, and scoring clarifications, see [`docs/faq.md`](docs/faq.md).
 
-## CRSArena-Eval Interactive Meta-Evaluation Interface (`interface/`)
+## CRSArena-Eval Interactive Meta-Evaluation Interface (`meta_eval_interface/`)
 
 We provide an easy-to-use meta-evaluation interface to evaluate your evaluator against the CRSArena-Eval dataset.
 The public interface is hosted at
-[`https://informagi.github.io/face/interface/`](https://informagi.github.io/face/interface/).
-See [`interface/README.md`](interface/README.md) for detailed instructions on how to run the interface locally.
+[`https://informagi.github.io/face/meta_eval_interface/`](https://informagi.github.io/face/meta_eval_interface/).
+See [`meta_eval_interface/README.md`](meta_eval_interface/README.md) for detailed instructions on how to run the interface locally.
 
 ![CRSArena-Eval demo](./demo/demo.webp)
 

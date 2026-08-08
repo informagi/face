@@ -25,8 +25,8 @@ jobs:
       - name: Build Pages artifact
         run: |
           rm -rf dist
-          mkdir -p dist/interface dist/survey
-          cp -R interface/. dist/interface/
+          mkdir -p dist/meta_eval_interface dist/survey
+          cp -R meta_eval_interface/. dist/meta_eval_interface/
           cp -R survey/. dist/survey/
           touch dist/.nojekyll
       - uses: actions/upload-pages-artifact@v3

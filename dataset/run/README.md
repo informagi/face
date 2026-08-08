@@ -47,6 +47,6 @@ python eval.py --run_file path/to/run_file.json --eval_file path/to/crs_arena_ev
 ## Easy-to-Use Meta-Evaluation Interface
 
 We provide an easy-to-use meta-evaluation interface to evaluate your evaluator against the CRSArena-Eval dataset.
-See [`interface/README.md`](../../interface/README.md) for detailed instructions on how to run the interface locally.
+See [`meta_eval_interface/README.md`](../../meta_eval_interface/README.md) for detailed instructions on how to run the interface locally.
 
 ![CRSArena-Eval demo](../../demo/demo.webp)
