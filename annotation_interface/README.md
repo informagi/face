@@ -1,11 +1,10 @@
-# dial-annotation
+# CRSArena-Eval Annotation Interface
 
-Annotation interface for the dialogue evaluation task.
-This directory contains the annotation interface.
+The **CRSArena-Eval annotation interface** is a browser-based tool for collecting human judgments of conversational systems.
 
 ## Directories
 
-**Directories *directly* related to running the annotation interface:**
+**Directories *directly* related to running the CRSArena-Eval annotation interface:**
 
 - `data`: Input data and gold annotations.
 - `docs`: Supporting documentation.

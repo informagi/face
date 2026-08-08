@@ -105,7 +105,7 @@ We also provide a python script to evaluate your evaluator on the CRSArena-Eval 
 
 ## CRSArena-Eval Annotation Interface (`annotation_interface/`)
 
-The [`annotation_interface/`](annotation_interface/) directory contains the browser-based interface used to collect human judgments for conversational-system evaluation. It supports custom CRSArena-Dial conversations, a hidden quality-control dialogue with gold annotations, dialogue allocation across workers, and annotation progress logging.
+The **CRSArena-Eval Annotation Interface** is a browser-based tool for collecting human judgments of conversational systems. It supports custom CRSArena-Dial conversations, a hidden quality-control dialogue with gold annotations, dialogue allocation across workers, and annotation progress logging.
 
 To run the interface locally:
 
