@@ -123,7 +123,7 @@ Then open [`http://localhost:5050/instructions.html`](http://localhost:5050/inst
 Browse the survey at
 [`https://informagus.nl/face/survey/`](https://informagus.nl/face/survey/).
 
-![Evaluation Aspect Survey demo](./survey/demo/evaluation-aspect-survey.webp)
+![Evaluation Aspect Survey demo](./survey/demo/evaluation-aspect-survey.png)
 
 ## Citation
 
