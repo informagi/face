@@ -5,7 +5,6 @@
 **/results
 /tmp
 AGENTS.md
-**/survey
 
 # annotation_interface runtime and generated files
 /annotation_interface/logs/
