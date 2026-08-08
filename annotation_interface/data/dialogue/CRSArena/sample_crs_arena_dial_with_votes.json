@@ -1,0 +1,182 @@
+[
+    {
+        "conversation ID": "chatgpt_opendialkg_aa4e6c42-af03-401a-bf78-133777cf7841",
+        "agent": {
+            "id": "chatgpt_opendialkg",
+            "type": "AGENT"
+        },
+        "user": {
+            "id": "aa4e6c42-af03-401a-bf78-133777cf7841",
+            "type": "USER"
+        },
+        "metadata": {
+            "sentiment": "frustrated"
+        },
+        "conversation": [
+            {
+                "participant": "USER",
+                "utterance": "Hello, I'm interested in an older action movie that focuses on ancient civilizations and archeology. Could you recommend a few to me?",
+                "utterance ID": "chatgpt_opendialkg-aa4e6c42-af03-401a-bf78-133777cf7841_0"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "I would recommend the following items   \n1  Apocalypto  \n2  Gods of Egypt  \n3  The Egyptian",
+                "utterance ID": "chatgpt_opendialkg-aa4e6c42-af03-401a-bf78-133777cf7841_1"
+            },
+            {
+                "participant": "USER",
+                "utterance": "What is the first movie about?",
+                "utterance ID": "chatgpt_opendialkg-aa4e6c42-af03-401a-bf78-133777cf7841_2"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "1  Apocalypto  \n2  Gods of Egypt  \n3  The Egyptian  \n4  Apocalypto",
+                "utterance ID": "chatgpt_opendialkg-aa4e6c42-af03-401a-bf78-133777cf7841_3"
+            },
+            {
+                "participant": "USER",
+                "utterance": "What is Apocalypto about? Can you summarize it for me?",
+                "utterance ID": "chatgpt_opendialkg-aa4e6c42-af03-401a-bf78-133777cf7841_4"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "I would recommend the following items   \n1  Apocalypto  \n2  Gods of Egypt  \n3  The Egyptian  \n4  Apocalypto  \n5  Raiders of the Lost Ark  \n6  The Mummy  \n7  Indiana Jones and the Last Crusade  \n8  Stargate  \n9  The Scorpion King  \n10  The Mummy Returns",
+                "utterance ID": "chatgpt_opendialkg-aa4e6c42-af03-401a-bf78-133777cf7841_5"
+            },
+            {
+                "participant": "USER",
+                "utterance": "When did these movies come out?",
+                "utterance ID": "chatgpt_opendialkg-aa4e6c42-af03-401a-bf78-133777cf7841_6"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "I would recommend the following items   \n1  Apocalypto  \n2  Gods of Egypt  \n3  The Egyptian  \n4  Apocalypto  \n5  Raiders of the Lost Ark  \n6  The Mummy  \n7  Indiana Jones and the Last Crusade  \n8  Stargate  \n9  The Scorpion King  \n10  The Mummy Returns",
+                "utterance ID": "chatgpt_opendialkg-aa4e6c42-af03-401a-bf78-133777cf7841_7"
+            },
+            {
+                "participant": "USER",
+                "utterance": "Which of these is the oldest and latest movie?",
+                "utterance ID": "chatgpt_opendialkg-aa4e6c42-af03-401a-bf78-133777cf7841_8"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "Oldest  The Egyptian  \nLatest  Gods of Egypt",
+                "utterance ID": "chatgpt_opendialkg-aa4e6c42-af03-401a-bf78-133777cf7841_9"
+            },
+            {
+                "participant": "USER",
+                "utterance": "Which is the oldest?",
+                "utterance ID": "chatgpt_opendialkg-aa4e6c42-af03-401a-bf78-133777cf7841_10"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "I would recommend the following items   \n1  \uc5c4\ub9c8\ub97c \ubd80\ud0c1\ud574  \n2  Yes Please  \n3  Eldest",
+                "utterance ID": "chatgpt_opendialkg-aa4e6c42-af03-401a-bf78-133777cf7841_11"
+            }
+        ],
+        "vote_result": {
+            "result": "win",
+            "details": {
+                "crs1": "chatgpt_opendialkg",
+                "crs2": "kbrd_redial",
+                "vote": "chatgpt_opendialkg",
+                "feedback": "CRS 1 had errors or was cyclical, but it at least understood my original prompt and gave me answers relevant to it. Nothing CRS 2 provided was related to my original prompt and some responses were non-sensical. "
+            }
+        }
+    },
+    {
+        "conversation ID": "barcor_opendialkg_f8f1280c-474b-4229-a37b-a222f09ae9e4",
+        "agent": {
+            "id": "barcor_opendialkg",
+            "type": "AGENT"
+        },
+        "user": {
+            "id": "f8f1280c-474b-4229-a37b-a222f09ae9e4",
+            "type": "USER"
+        },
+        "metadata": {
+            "sentiment": "satisfied"
+        },
+        "conversation": [
+            {
+                "participant": "USER",
+                "utterance": "what kind of movie recommendations would you like to explore? Any particular genre or theme you're in the mood for?",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_0"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "What kind of movies do you like watching? The Golden Compass starring Tom Cruise",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_1"
+            },
+            {
+                "participant": "USER",
+                "utterance": "The Golden Compass and Tom Cruis, interesting combination! It seems like you might be mixing up a couple of films here.",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_2"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "A couple of good ones are Vanilla Sky and The Last Samurai.",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_3"
+            },
+            {
+                "participant": "USER",
+                "utterance": "yes, Vanilla sky is fine",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_4"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "Vanilla Sky is also in the genre of War.",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_5"
+            },
+            {
+                "participant": "USER",
+                "utterance": "is it suitable for family",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_6"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "I would recommend the following items   \n1  The Matrix  \n2  War  \n3  Drama",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_7"
+            },
+            {
+                "participant": "USER",
+                "utterance": "so you reommand it.",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_8"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "The following items are  War, Life of Brian, and The Matrix Reloaded.",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_9"
+            },
+            {
+                "participant": "USER",
+                "utterance": "fine, i choose The matrix reloaded",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_10"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "I would recommend the following items   \n1  The Matrix  \n2  V for Vendetta  \n3  War",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_11"
+            },
+            {
+                "participant": "USER",
+                "utterance": "ok,",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_12"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "I would recommend the following items   \n1  The Matrix  \n2  V for Vendetta  \n3  X-Men 2",
+                "utterance ID": "barcor_opendialkg-f8f1280c-474b-4229-a37b-a222f09ae9e4_13"
+            }
+        ],
+        "vote_result": {
+            "result": "lose",
+            "details": {
+                "crs1": "barcor_opendialkg",
+                "crs2": "barcor_redial",
+                "vote": "barcor_redial",
+                "feedback": "CR2 seems to be more intellegent and friendly. It understood my instruction correctly and gave me answers. "
+            }
+        }
+    }
+]

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendation System Evaluation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 50px;
+            min-height: 100vh;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        .chat-container {
+            max-width: 800px;
+            width: 100%;
+            max-height: calc(100vh - 140px);
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .message {
+            width: 70%;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            position: relative;
+            clear: both;
+            box-sizing: border-box;
+        }
+        .user-message {
+            float: right;
+            background-color: #dcf8c6;
+            margin-left: 30%;
+        }
+        .system-message {
+            float: left;
+            background-color: #fff;
+            margin-right: 30%;
+        }
+        .quiz-container {
+            margin-bottom: 15px;
+        }
+        .quiz-group {
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        .quiz-group.turn-level {
+            background-color: #fffacd; /* Light yellow */
+        }
+        .quiz-group.dialogue-level {
+            background-color: #e6f3ff; /* Light blue */
+        }
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .quiz-options {
+            margin-top: 10px;
+        }
+        .quiz-options label {
+            display: inline-block;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        .quiz-options input[type="radio"] {
+            margin-right: 5px;
+        }
+        .message.highlighted {
+            background-color: yellow;
+        }
+        
+        /* Add these new styles */
+        #quizContent {
+            display: none;
+        }
+        #consentButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Instructions</h2>
+        <ul>
+            <li><strong>Setting:</strong> You are talking to the movie recommendation chat assistant.</li>
+            <li><strong>Task:</strong> Please rate the assistant's response as a user of this chat service based on the aspects described below.</li>
+        </ul>
+        <h3>Turn-level aspects:</h3>
+        <p>Evaluate the assistant performance based on <span style='color: red;'>each turn</span>. Here, focus on the single-turn which is highlighted in yellow color. The aspects are:</p>
+        <div id="turnLevelAspects"></div>
+        <h3>Dialogue-level aspects:</h3>
+        <p>Please evaluate the assistant's performance based on the <span style='color: red;'>whole conversation</span>. Here, consider <span style='color: red;'>all exchanges between the user and the assistant</span>, and answer the questions. The aspects are:</p>
+        <div id="dialogueLevelAspects"></div>
+        <h2>Terms and Conditions:</h2>
+        <ul>
+            <li><strong>Compatibility:</strong> This task is incompatible with certain browsers and settings. If you are unable to access the page or send messages, it indicates that your settings are not compatible with this task. Please close the task immediately upon discovering that your browser is incompatible, as we are unable to compensate for any incomplete tasks.</li>
+            <li><strong>Data collection:</strong> Collected data will be used for research purposes, which may be released to the public.</li>
+            <li><strong>Rejection criteria:</strong> Not following the instructions can lead to rejection; carefully read the instructions before proceeding.</li>
+        </ul>
+        <h2>Quiz:</h2>
+        <p>To check your understanding of the task, please complete the quiz below. Proceed to the quiz only if you accept the terms and conditions.</p>
+    </div>
+
+    <!-- Add this new div for the consent button -->
+    <div id="consentButtonContainer">
+        <button id="consentButton">I agree to the terms of consent and move to the quiz</button>
+    </div>
+
+    <!-- Wrap the quiz content in a new div -->
+    <div id="quizContent">
+        <div style="height: 20px;"></div>
+        <div class="chat-container">
+            <h3>Example Conversation</h3>
+            <div class="message user-message">
+                <b>You:</b> Hey, I need a movie recommendation!
+            </div>
+            <div class="message system-message">
+                <b>Assistant:</b> How about Spirited Away?
+            </div>
+            <div class="message user-message">
+                <b>You:</b> That sounds cool. I'll give it a shot. Is it really that special?
+            </div>
+            <div class="message system-message highlighted">
+                <b>Assistant:</b> Definitely! It even won an Oscar for Best Animated Feature in 2003—the first hand-drawn, non-English film to do it.
+            </div>
+            <div class="message user-message">
+                <b>You:</b> No way, I didn't know that! Thanks for the recommendation!
+            </div>
+        </div>
+        <div id="quizContainer"></div>
+        <button id="submitQuiz" style="margin-top: 20px; padding: 10px 20px; font-size: 16px;">Submit the quiz and proceed to the main task</button>
+    </div>
+    
+    <script src="/static/js/aspects.js"></script>
+    <script>
+        function createQuiz(turnLevelQuestions, dialogueLevelQuestions) {
+            const quizContainer = document.getElementById('quizContainer');
+            
+            function createQuizGroup(questions, className, title) {
+                const groupDiv = document.createElement('div');
+                groupDiv.className = `quiz-group ${className}`;
+                groupDiv.innerHTML = `<h3>${title}</h3>`;
+                
+                questions.forEach((question, index) => {
+                    if (question.name === 'Overall Impression') return;
+
+                    const quizDiv = document.createElement('div');
+                    quizDiv.className = 'quiz-container';
+                    quizDiv.innerHTML = `
+                        <div class="quiz-question">${question.question}</div>
+                        <div class="quiz-options">
+                            <label>
+                                <input type="radio" name="quiz_${className}_${index}" value="No">
+                                No
+                            </label>
+                            <label>
+                                <input type="radio" name="quiz_${className}_${index}" value="Yes">
+                                Yes
+                            </label>
+                        </div>
+                    `;
+                    groupDiv.appendChild(quizDiv);
+                });
+                
+                quizContainer.appendChild(groupDiv);
+            }
+
+            createQuizGroup(turnLevelQuestions, 'turn-level', 'Turn-Level Aspects');
+            createQuizGroup(dialogueLevelQuestions, 'dialogue-level', 'Dialogue-Level Aspects');
+        }
+
+        // Call the function with separated aspect arrays
+        createQuiz(aspectsTurnLevel, aspectsDialogueLevel);
+
+        // New function to check answers
+        function checkAnswers() {
+            const correctAnswers = {
+                'Relevance': 'Yes',
+                'Interestingness': 'Yes',
+                'Understanding': ['Yes', 'No'],
+                'Task Completion': 'Yes',
+                'Efficiency': 'Yes',
+                'Interest Arousal': ['Yes', 'No']
+            };
+
+            let mistakeCount = 0;
+
+            document.querySelectorAll('.quiz-container').forEach(container => {
+                const questionText = container.querySelector('.quiz-question').textContent;
+                const selectedAnswer = container.querySelector('input[type="radio"]:checked');
+                
+                if (!selectedAnswer) {
+                    mistakeCount++;
+                    return;
+                }
+
+                const answerValue = selectedAnswer.value;
+                const aspectName = questionText.split(':')[0].trim();
+
+                if (correctAnswers[aspectName]) {
+                    if (Array.isArray(correctAnswers[aspectName])) {
+                        if (!correctAnswers[aspectName].includes(answerValue)) {
+                            mistakeCount++;
+                        }
+                    } else if (correctAnswers[aspectName] !== answerValue) {
+                        mistakeCount++;
+                    }
+                }
+            });
+
+            if (mistakeCount === 0) {
+                window.location.href = '/main-task.html';
+            } else {
+                alert(`Please check your answers and try again. You have ${mistakeCount} mistake${mistakeCount > 1 ? 's' : ''}.`);
+            }
+        }
+
+        // Add event listener to the submit button
+        document.getElementById('submitQuiz').addEventListener('click', checkAnswers);
+
+        // Disable right-click
+        // document.addEventListener('contextmenu', function(e) {
+        //     e.preventDefault();
+        // });
+
+        function populateAspects() {
+            let turnLevelAspects = '';
+            let dialogueLevelAspects = '';
+            console.log(turnLevelAspects);
+            turnLevelAspects = '<ul>';
+            aspectsTurnLevel.forEach(aspect => {
+                if (aspect.name && aspect.definition) {
+                    turnLevelAspects += `<li><b>${aspect.name}:</b> ${aspect.definition}</li>`;
+                }
+            });
+            turnLevelAspects += '</ul>';
+
+            dialogueLevelAspects = '<ul>';
+            aspectsDialogueLevel.forEach(aspect => {
+                if (aspect.name && aspect.definition) {
+                    dialogueLevelAspects += `<li><b>${aspect.name}:</b> ${aspect.definition}</li>`;
+                }
+            });
+            dialogueLevelAspects += '</ul>';
+
+            // Update the HTML elements with the new content
+            console.log(turnLevelAspects);
+            document.getElementById('turnLevelAspects').innerHTML = turnLevelAspects;
+            document.getElementById('dialogueLevelAspects').innerHTML = dialogueLevelAspects;
+        }
+
+        // Call the function after the page loads
+        window.onload = populateAspects;
+
+        // Add this new function to show the quiz content
+        function showQuizContent() {
+            document.getElementById('consentButtonContainer').style.display = 'none';
+            document.getElementById('quizContent').style.display = 'block';
+        }
+
+        // Add this event listener for the consent button
+        document.getElementById('consentButton').addEventListener('click', showQuizContent);
+    </script>
+</body>
+</html>

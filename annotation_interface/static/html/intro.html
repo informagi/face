@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intro Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .intro-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .text-container {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .intro-description {
+            font-size: 18px;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        #proceed-btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #075e54;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #prolific-id-input, #terms-conditions {
+            display: block;
+        }
+        #prolific-id {
+            padding: 5px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 300px;
+        }
+        #submit-btn {
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            background-color: #075e54;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+        #terms-conditions, #prolific-id-input {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="intro-page" class="intro-page">
+        <div id="your-task" class="text-container">
+            <p class="intro-description">
+                <b>Your Task</b>
+                <ul>
+                    <li><b>Setting:</b> You are talking to the movie recommendation chat assistant.</li>
+                    <li><b>Task:</b> Please rate the assistant's response as a user of this chat service.</li>
+                </ul>
+            </p>
+        </div>
+        
+        <div id="terms-conditions" class="text-container">
+            <p class="intro-description">
+                <b>Terms and Conditions</b>
+                <ul>
+                    <li><b>Compatibility:</b> This task is incompatible with certain browsers and settings.
+                        If you are unable to access the page or send messages, it indicates that your settings are not compatible with this task.
+                        Please close the task immediately upon discovering that your browser is incompatible, as we are unable to compensate for any incomplete tasks.</li>
+                    <li><b>Data collection:</b> Collected data will be used for research purposes, which may be released to the public.</li>
+                    <li><b>Rejection criteria:</b> Not following the instructions can lead to rejection; carefully read the instructions before proceeding.</li>
+                </ul>
+            </p>
+            <p class="intro-description">
+                <input type="text" id="prolific-id" placeholder="Enter your Prolific ID">
+            </p>
+        </div>
+        
+        <button id="proceed-btn">Next</button>
+    </div>
+
+    <script>
+        console.log('Intro frame HTML loaded');
+        window.onload = function() {
+            console.log('Intro frame window loaded');
+            const proceedBtn = document.getElementById('proceed-btn');
+            const termsConditions = document.getElementById('terms-conditions');
+            let step = 1;
+
+            proceedBtn.addEventListener('click', function() {
+                console.log('Proceed button clicked');
+                if (step === 1) {
+                    console.log('Moving to step 2');
+                    document.getElementById('your-task').style.display = 'none';
+                    termsConditions.style.display = 'block';
+                    proceedBtn.textContent = 'Agree and proceed with the task';
+                    step = 2;
+                } else if (step === 2) {
+                    console.log('Attempting to send agreedAndProceed message');
+                    const prolificId = document.getElementById('prolific-id').value;
+                    if (prolificId.trim() !== '') {
+                        window.parent.postMessage({type: 'agreedAndProceed', prolificId: prolificId}, '*');
+                        console.log('agreedAndProceed message sent');
+                    } else {
+                        console.log('Prolific ID is empty');
+                        alert('Please enter your Prolific ID');
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>

@@ -5,3 +5,9 @@
 **/results
 /tmp
 AGENTS.md
+**/survey
+
+# annotation_interface runtime and generated files
+/annotation_interface/logs/
+/annotation_interface/ngrok/ngrok.log
+/annotation_interface/ngrok/ngrok_url.txt

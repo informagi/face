@@ -11,7 +11,8 @@ This is the repo for the paper: **[FACE: A Fine-Grained Reference-Free Evaluator
 
 Specifically, the repository contains:  
 - The [**`CRSArena-Eval dataset`**](dataset/) with human-annotated conversations and meta-evaluation scripts.
-- The [**`CRSArena-Eval interface`**](interface/) for interactive meta-evaluation of your evaluator vs. baselines.
+- The [**`CRSArena-Eval annotation interface`**](annotation_interface/) used to collect human judgments.
+- The [**`CRSArena-Eval meta-evaluation interface`**](interface/) for interactive meta-evaluation of your evaluator vs. baselines.
 - The [**`Evaluation aspect survey`**](https://informagus.nl/face/survey/) compares conversational-system evaluation aspects across the literature.
 - The [**`FACE`**](face/) implementation with particle generation and scoring tools.
 
@@ -101,6 +102,19 @@ See [`interface/README.md`](interface/README.md) for detailed instructions on ho
 We also provide a python script to evaluate your evaluator on the CRSArena-Eval dataset.
 
 👉 For detailed run file format and evaluation instructions, see [`dataset/run/README.md`](dataset/run/README.md).
+
+## CRSArena-Eval Annotation Interface (`annotation_interface/`)
+
+The [`annotation_interface/`](annotation_interface/) directory contains the browser-based interface used to collect human judgments for conversational-system evaluation. It supports custom CRSArena-Dial conversations, a hidden quality-control dialogue with gold annotations, dialogue allocation across workers, and annotation progress logging.
+
+To run the interface locally:
+
+```bash
+cd annotation_interface
+uv run python app.py
+```
+
+Then open [`http://localhost:5050/instructions.html`](http://localhost:5050/instructions.html). Before deploying the interface, configure the completion code, input conversations, and hidden-test data as described in [`annotation_interface/README.md`](annotation_interface/README.md).
 
 ## Evaluation Aspect Survey (`survey/`)
 

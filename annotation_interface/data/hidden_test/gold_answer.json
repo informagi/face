@@ -1,0 +1,94 @@
+{
+    "conversation": {
+        "conversation_id": "kbrd_redial_049a839e-89e5-4e0b-92e7-f72eb5052ca5",
+        "feedback": "",
+        "sentiment": "frustrated",
+        "system_dataset": "kbrd_redial",
+        "turns": [
+            "USER: Please introduce a movie for me?",
+            "AGENT: What kind of movies do you like? ",
+            "USER: I like fun movie",
+            "AGENT: I would recommend the following items: 1: Bambi (2013) 2: 2 Guns (2013) 3: Why Him? (2016) ",
+            "USER: No, I like new ones?",
+            "AGENT: I like the original The Lion King (1994) "
+        ],
+        "user_id": "049a839e-89e5-4e0b-92e7-f72eb5052ca5",
+        "vote": "win"
+    },
+    "annotations": {
+        "annotator_prolific_id": "testmode",
+        "turn_level": [
+            {
+                "turn": 1,
+                "aspect": "Relevance",
+                "answer": [
+                    "Yes"
+                ]
+            },
+            {
+                "turn": 1,
+                "aspect": "Interestingness",
+                "answer": [
+                    "Yes",
+                    "Somewhat"
+                ]
+            },
+            {
+                "turn": 3,
+                "aspect": "Relevance",
+                "answer": [
+                    "No",
+                    "Somewhat"
+                ]
+            },
+            {
+                "turn": 3,
+                "aspect": "Interestingness",
+                "answer": [
+                    "Somewhat",
+                    "No"
+                ]
+            },
+            {
+                "turn": 5,
+                "aspect": "Relevance",
+                "answer": [
+                    "No"
+                ]
+            },
+            {
+                "turn": 5,
+                "aspect": "Interestingness",
+                "answer": [
+                    "No"
+                ]
+            }
+        ],
+        "dialogue_level": [
+            {
+                "aspect": "Understanding",
+                "answer": "No"
+            },
+            {
+                "aspect": "Task Completion",
+                "answer": "No"
+            },
+            {
+                "aspect": "Efficiency",
+                "answer": "No"
+            },
+            {
+                "aspect": "Interest Arousal",
+                "answer": "No"
+            },
+            {
+                "aspect": "Overall Impression",
+                "answer": [
+                    "1. Very dissatisfied",
+                    "2. Dissatisfied"
+                ]
+            }
+        ]
+    },
+    "time": "2024-10-06T21:38:04.849Z"
+}

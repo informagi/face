@@ -1,0 +1,57 @@
+[
+    {
+        "conversation ID": "kbrd_redial_049a839e-89e5-4e0b-92e7-f72eb5052ca5",
+        "agent": {
+            "id": "kbrd_redial",
+            "type": "AGENT"
+        },
+        "user": {
+            "id": "049a839e-89e5-4e0b-92e7-f72eb5052ca5",
+            "type": "USER"
+        },
+        "conversation": [
+            {
+                "participant": "USER",
+                "utterance": "Please introduce a movie for me?",
+                "utterance ID": "kbrd_redial-049a839e-89e5-4e0b-92e7-f72eb5052ca5_0"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "What kind of movies do you like? ",
+                "utterance ID": "kbrd_redial-049a839e-89e5-4e0b-92e7-f72eb5052ca5_1"
+            },
+            {
+                "participant": "USER",
+                "utterance": "I like fun movie",
+                "utterance ID": "kbrd_redial-049a839e-89e5-4e0b-92e7-f72eb5052ca5_2"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "I would recommend the following items: 1: Bambi (2013) 2: 2 Guns (2013) 3: Why Him? (2016) ",
+                "utterance ID": "kbrd_redial-049a839e-89e5-4e0b-92e7-f72eb5052ca5_3"
+            },
+            {
+                "participant": "USER",
+                "utterance": "No, I like new ones?",
+                "utterance ID": "kbrd_redial-049a839e-89e5-4e0b-92e7-f72eb5052ca5_4"
+            },
+            {
+                "participant": "AGENT",
+                "utterance": "I like the original The Lion King (1994) ",
+                "utterance ID": "kbrd_redial-049a839e-89e5-4e0b-92e7-f72eb5052ca5_5"
+            }
+        ],
+        "metadata": {
+            "sentiment": "frustrated"
+        },
+        "vote_result": {
+            "result": "win",
+            "details": {
+                "crs1": "kbrd_redial",
+                "crs2": "kbrd_opendialkg",
+                "vote": "kbrd_redial",
+                "feedback": ""
+            }
+        }
+    }
+]

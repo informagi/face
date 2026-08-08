@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dialogue Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .phone-container {
+            width: 360px;
+            height: 640px;
+            background-color: #fff;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+        .phone-header {
+            background-color: #075e54;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .chat-container {
+            height: calc(100% - 60px);
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #e5ddd5;
+        }
+        .message {
+            width: 70%;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            position: relative;
+            clear: both;
+            box-sizing: border-box;
+        }
+        .user-message {
+            float: right;
+            background-color: #dcf8c6;
+            margin-left: 30%;
+        }
+        .system-message {
+            float: left;
+            background-color: #fff;
+            margin-right: 30%;
+        }
+        .metadata {
+            font-size: 0.8em;
+            color: #666;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+        }
+        .controls {
+            margin-top: 20px;
+            display: none; /* Hide controls by default */
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+            background-color: #075e54;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .feedback-container {
+            box-sizing: border-box; /* Add this line */
+            width: 300px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 640px; /* Match the height of the phone-container */
+        }
+        .feedback-question {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .feedback-options {
+            display: flex;
+            flex-direction: column;
+        }
+        .feedback-option {
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #e1f5fe;
+            border: 1px solid #03a9f4;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+            color: #0277bd;
+            font-weight: bold;
+            position: relative;
+        }
+        .feedback-option::after {
+            content: attr(data-explanation);
+            position: absolute;
+            top: 50%;
+            left: calc(100% + 10px);
+            transform: translateY(-50%);
+            background-color: #03a9f4;  /* Light blue color */
+            color: #ffffff;  /* White text for better contrast */
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            width: 200px;
+            word-wrap: break-word;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 1;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);  /* Subtle shadow for depth */
+        }
+        .feedback-option::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%);
+            border: 8px solid transparent;
+            border-right-color: #03a9f4;  /* Match the bubble color */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        .feedback-option:hover::after,
+        .feedback-option:hover::before {
+            opacity: 1;
+            visibility: visible;
+        }
+        .feedback-option:hover {
+            background-color: #e1f5fe;  /* Light blue background on hover */
+            color: #0277bd;  /* Darker blue text on hover */
+        }
+        .no-question {
+            font-style: italic;
+            color: #666;
+        }
+        .highlight {
+            animation: highlightAnimation 1s ease-in-out 2;
+        }
+        @keyframes highlightAnimation {
+            0% { background-color: transparent; }
+            50% { background-color: yellow; }
+            100% { background-color: transparent; }
+        }
+        .yellow-background {
+            background-color: yellow !important;
+        }
+        .feedback-container {
+            position: relative;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .popup-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        #popup-next-btn, #popup-close-btn-dialogue-aspect, #popup-close-btn-next-dialogue {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #075e54;
+            color: white;
+        }
+
+        #popup-next-btn:disabled, #popup-close-btn-dialogue-aspect:disabled, #popup-close-btn-next-dialogue:disabled {
+            background-color: #cccccc;
+            color: #666666;
+            cursor: not-allowed;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: rgba(7, 94, 84, 0.2);
+            padding: 3px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .progress-bar {
+            width: 0;
+            height: 20px;
+            background-color: #075e54;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+        }
+
+        #intro-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 2000;
+        }
+
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            z-index: 1999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .progress-indicator {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+    <script>
+        const numDialoguesPerWorker = JSON.parse('{{ num_dialogues_per_worker}}');
+    </script>
+</head>
+<body>
+    <div id="loading-overlay">
+        <p>Loading... (If not proceed to the next page, refresh the page.)</p>
+    </div>
+
+    <iframe id="intro-frame" src="/static/html/intro.html" style="display: block; width: 100%; height: 100%; border: none;"></iframe>
+
+    <div class="progress-container">
+        <div id="progress-bar" class="progress-bar">0%</div>
+    </div>
+    <div class="container">
+        <div class="phone-container">
+            <div class="phone-header">Messages</div>
+            <div id="dialogue-container" class="chat-container"></div>
+        </div>
+        <div class="feedback-container" id="feedback-container">
+            <div class="feedback-question" id="feedback-question"></div>
+            <div class="feedback-options" id="feedback-options"></div>
+            <div class="progress-indicator" id="progress-indicator"></div>
+        </div>
+    </div>
+    <div class="controls">
+        <button id="next-turn-btn">Next Turn</button>
+        <button id="next-dialogue-btn">Next Dialogue</button>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p id="popup-text"></p>
+            <button id="popup-next-btn">Next</button>
+            <button id="popup-close-btn-dialogue-aspect">Continue to the dialogue-level evaluation</button>
+            <button id="popup-close-btn-next-dialogue">Continue to the next dialogue</button>
+        </div>
+    </div>
+
+    <div id="completion-container" style="display: none;"></div>
+
+    <script src="/static/js/aspects.js"></script>
+
+    <script>
+    // Add this function at the beginning of your script
+    function log(message) {
+        console.log(`[${new Date().toISOString()}] ${message}`);
+    }
+
+    let dialoguesData = [];
+    let currentIndex = 0;
+    let currentTurn = 0;
+    let currentAssistantTurnIndex = -1;
+    let totalTurnsInCurrentDialogue = 0;
+    let dialoguesCompleted = 0;
+    let annotationResults = {
+        "annotator_prolific_id": "",
+        "turn_level": [],
+        "dialogue_level": []
+    };
+
+    function updateProgressBar() {
+        const dialogueProgress = (currentTurn / totalTurnsInCurrentDialogue) / numDialoguesPerWorker;
+        const overallProgress = ((dialoguesCompleted / numDialoguesPerWorker) + dialogueProgress) * 100;
+        const percentage = Math.round(overallProgress);
+        const progressBar = document.getElementById('progress-bar');
+        progressBar.style.width = `${percentage}%`;
+        progressBar.textContent = `${percentage}%`;
+    }
+
+    async function typeMessageUser(element, text, endSymbol = '|') {
+        const container = document.getElementById('dialogue-container');
+        
+        // Display the endSymbol
+        element.innerHTML += endSymbol;
+        container.scrollTop = container.scrollHeight;
+        
+        for (let index = 0; index < text.length; index++) {
+            // Update the message with the next character and the endSymbol
+            element.innerHTML = element.innerHTML.replace(endSymbol, '') + text.charAt(index) + endSymbol;
+            container.scrollTop = container.scrollHeight;
+            await new Promise(resolve => setTimeout(resolve, 25)); // Wait between characters
+        }
+        
+        // Remove the endSymbol after typing is complete
+        element.innerHTML = element.innerHTML.replace(endSymbol, '');
+        container.scrollTop = container.scrollHeight;
+        await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+
+    async function typeMessageAssistant(element, text, endSymbol = '●') {
+        const container = document.getElementById('dialogue-container');
+        
+        // Display the endSymbol and wait for 1 second
+        element.innerHTML += endSymbol;
+        container.scrollTop = container.scrollHeight;
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        const words = text.split(' ');
+        for (let index = 0; index < words.length; index++) {
+            // Update the message with the next word and the endSymbol
+            element.innerHTML = element.innerHTML.replace(endSymbol, '') + words[index] + ' ' + endSymbol;
+            container.scrollTop = container.scrollHeight;
+            await new Promise(resolve => setTimeout(resolve, 50)); // Wait between words
+        }
+        
+        // Remove the endSymbol after typing is complete
+        element.innerHTML = element.innerHTML.replace(' ' + endSymbol, '');
+        container.scrollTop = container.scrollHeight;
+        await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+
+    function highlightAssistantMessage(element) {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                element.classList.add('highlight');
+
+                function onAnimationEnd() {
+                    element.classList.remove('highlight');
+                    element.classList.add('yellow-background');
+                    element.removeEventListener('animationend', onAnimationEnd);
+                    resolve();
+                }
+
+                element.addEventListener('animationend', onAnimationEnd);
+            }, 1000); // 1-second delay
+        });
+    }
+
+    let currentAspectIndex = 0;
+    let currentDialogueAspectIndex = 0;
+
+    function updateProgressIndicator(isDialogueLevel) {
+        const progressIndicator = document.getElementById('progress-indicator');
+        const aspects = isDialogueLevel ? aspectsDialogueLevel : aspectsTurnLevel;
+        const currentIndex = isDialogueLevel ? currentDialogueAspectIndex : currentAspectIndex;
+        progressIndicator.textContent = `${currentIndex+1} / ${aspects.length}`;
+    }
+
+    function updateQuestionWindow(showQuestion, isDialogueLevel = false, customMessage = null) {
+        const questionElement = document.getElementById('feedback-question');
+        const optionsElement = document.getElementById('feedback-options');
+
+        if (customMessage) {
+            questionElement.innerHTML = `<span class="no-question">${customMessage}</span>`;
+            optionsElement.innerHTML = '';
+            removeHighlight();
+        } else if (showQuestion) {
+            const currentAspect = isDialogueLevel ? aspectsDialogueLevel[currentDialogueAspectIndex] : aspectsTurnLevel[currentAspectIndex];
+            questionElement.innerHTML = currentAspect.question;
+            optionsElement.innerHTML = Object.entries(currentAspect.options).map(([option, explanation]) => 
+                `<button class="feedback-option" data-value="${option}" data-explanation="${explanation}">${option}</button>`
+            ).join('');
+            addFeedbackListeners(isDialogueLevel);
+            updateProgressIndicator(isDialogueLevel);
+        } else {
+            questionElement.innerHTML = '<span class="no-question">No question</span>';
+            optionsElement.innerHTML = '';
+            removeHighlight();
+            document.getElementById('progress-indicator').textContent = '';
+        }
+    }
+
+    function removeHighlight() {
+        const assistantMessages = document.querySelectorAll('.message.system-message');
+        assistantMessages.forEach(msg => msg.classList.remove('yellow-background'));
+    }
+
+    function addFeedbackListeners(isDialogueLevel) {
+        document.querySelectorAll('.feedback-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const feedbackValue = this.dataset.value;
+                const aspectName = isDialogueLevel ? aspectsDialogueLevel[currentDialogueAspectIndex].name : aspectsTurnLevel[currentAspectIndex].name;
+                
+                if (isDialogueLevel) {
+                    annotationResults["dialogue_level"].push({
+                        aspect: aspectName,
+                        answer: feedbackValue
+                    });
+                    moveToNextDialogueAspect();
+                } else {
+                    annotationResults["turn_level"].push({
+                        turn: currentAssistantTurnIndex,  // Use currentAssistantTurnIndex instead of currentTurn
+                        aspect: aspectName,
+                        answer: feedbackValue
+                    });
+                    moveToNextAspect();
+                }
+            });
+        });
+    }
+
+    function moveToNextAspect() {
+        currentAspectIndex++;
+        if (currentAspectIndex < aspectsTurnLevel.length) {
+            updateQuestionWindow(true);
+        } else {
+            currentAspectIndex = 0;
+            updateQuestionWindow(false);
+            document.getElementById('progress-indicator').textContent = '';
+            
+            // Check if this was the last turn and all questions are answered
+            const currentDialogue = dialoguesData[currentIndex];
+            if (currentTurn === currentDialogue.turns.length - 1) {
+                setTimeout(() => {
+                    showPopup();
+                }, 1000);
+            } else {
+                // If it's not the last turn, move to the next turn
+                // If it is the last turn, show the popup (in autoProgress)
+                moveToNextTurn();
+            }
+        }
+    }
+
+    function moveToNextDialogueAspect() {
+        currentDialogueAspectIndex++;
+        if (currentDialogueAspectIndex < aspectsDialogueLevel.length) {
+            updateQuestionWindow(true, true);
+        } else {
+            updateQuestionWindow(false, false, 'All questions answered');
+            document.getElementById('progress-indicator').textContent = '';
+            moveToNextDialogue();  // Directly call moveToNextDialogue() here
+        }
+    }
+
+    const popupLines = [
+        "Now that you have finished the conversation, let's proceed to the <span style='color: red;'>dialogue-level evaluation</span>.",
+        "Please evaluate the assistant's performance based on the <span style='color: red;'>whole conversation</span>.",
+        "Consider <span style='color: red;'>all exchanges between the user and the assistant</span>, and answer the questions."
+    ];
+    let currentPopupLine = 0;
+
+    function showPopup() {
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('popup-text').innerHTML = popupLines[currentPopupLine];
+        const nextButton = document.getElementById('popup-next-btn');
+        const closeButtonDialogueAspect = document.getElementById('popup-close-btn-dialogue-aspect');
+        const closeButtonNextDialogue = document.getElementById('popup-close-btn-next-dialogue');
+        
+        if (currentPopupLine === popupLines.length - 1) {
+            nextButton.style.display = 'none';
+            closeButtonDialogueAspect.style.display = 'inline-block';
+            closeButtonNextDialogue.style.display = 'none';
+        } else {
+            nextButton.style.display = 'inline-block';
+            closeButtonDialogueAspect.style.display = 'none';
+            closeButtonNextDialogue.style.display = 'none';
+        }
+    }
+
+    async function autoProgress() {
+        return new Promise(async (resolve) => {
+
+            // Check if we're currently showing a question
+            if (document.querySelector('.feedback-option')) {
+                resolve();
+                return;
+            }
+
+            if (currentTurn + 1 < dialoguesData[currentIndex].turns.length) {
+                // Move to next turn
+                await moveToNextTurn();
+            } else {
+                log('autoProgress: no more turns, not progressing');
+            }
+
+            resolve();
+        });
+    }
+
+    async function displayDialogue(dialogueIndex, currentTurnNum = 1) {
+        log(`Displaying dialogue: index ${dialogueIndex}, turn ${currentTurnNum}`);
+        const container = document.getElementById('dialogue-container');
+        const dialogue = dialoguesData[dialogueIndex];
+
+        container.innerHTML = '';
+
+        // Display metadata only if the annotator's Prolific ID is "testmode"
+        console.log('annotationResults', annotationResults);
+        if (annotationResults["annotator_prolific_id"] === "testmode") {
+            const metadata = document.createElement('div');
+            metadata.className = 'metadata';
+            metadata.innerHTML = `
+                <strong>User ID:</strong> ${dialogue.user_id}<br>
+                <strong>System Dataset:</strong> ${dialogue.system_dataset}<br>
+                <strong>Sentiment:</strong> ${dialogue.sentiment}<br>
+                <strong>Vote:</strong> ${dialogue.vote}<br>
+                <strong>Feedback:</strong> ${dialogue.feedback}
+            `;
+            container.appendChild(metadata);
+        }
+        
+        // Set total turns in current dialogue
+        totalTurnsInCurrentDialogue = dialogue.turns.length;
+        
+        // Only reset when starting a new dialogue
+        if (currentTurnNum === 1) {
+            updateProgressBar();
+
+            // Add a 1-second delay before showing the first message
+            await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+
+        let previousAssistantElement = null;
+        const isLastTurn = currentTurnNum === dialogue.turns.length;
+
+        // Display turns
+        for (let i = 0; i < currentTurnNum && i < dialogue.turns.length; i++) {
+            const turn = dialogue.turns[i];
+            if (turn) {
+                const messageElement = document.createElement('div');
+                const isUserMessage = turn.trim().startsWith('USER:');
+                messageElement.className = isUserMessage ? 'message user-message' : 'message system-message';
+                container.appendChild(messageElement);
+
+                if (isUserMessage) {
+                    messageElement.innerHTML = '<b>You: </b>';
+                    if (i === currentTurnNum - 1) {
+                        // Apply typing effect only to the current turn
+                        await typeMessageUser(messageElement, turn.replace(/^USER:\s*/i, ''));
+                        // After typing is done, check if previous message was assistant's
+                        if (previousAssistantElement) {
+                            // Highlight assistant's previous message and show feedback
+                            await highlightAssistantMessage(previousAssistantElement);
+                            currentAspectIndex = 0;
+                            updateQuestionWindow(true);
+                        } else {
+                            updateQuestionWindow(false);
+                        }
+                    } else {
+                        // Display previous turns immediately
+                        messageElement.innerHTML += turn.replace(/^USER:\s*/i, '');
+                    }
+                } else {
+                    // This is an assistant turn
+                    currentAssistantTurnIndex = i;  // Update the assistant turn index
+                    messageElement.innerHTML = '<b>Assistant: </b>';
+                    if (i === currentTurnNum - 1) {
+                        await typeMessageAssistant(messageElement, turn.replace(/^AGENT:\s*/i, ''));
+                        previousAssistantElement = messageElement;
+                        
+                        if (isLastTurn) {
+                            // If this is the last turn, show the question immediately
+                            await highlightAssistantMessage(messageElement);
+                            currentAspectIndex = 0;
+                            updateQuestionWindow(true);
+                        } else {
+                            // For other turns, don't show the question yet
+                            updateQuestionWindow(false);
+                        }
+                    } else {
+                        // Display previous turns immediately
+                        messageElement.innerHTML += turn.replace(/^AGENT:\s*/i, '');
+                        previousAssistantElement = messageElement;
+                    }
+                }
+            }
+        }
+
+        // Remove the immediate popup call for the last turn
+        if (!isLastTurn && !dialogue.turns[currentTurnNum - 1].trim().startsWith('USER:')) {
+            updateQuestionWindow(false);
+        }
+
+        // Update progress bar after displaying each turn
+        updateProgressBar();
+
+        // Call autoProgress after displaying the current turn
+        await autoProgress();
+    }
+
+    function startDialogueLevelQuestions() {
+        currentDialogueAspectIndex = 0;
+        updateQuestionWindow(true, true);
+    }
+
+    function resetAnswers() {
+        annotationResults = {
+            "annotator_prolific_id": annotationResults["annotator_prolific_id"],
+            "turn_level": [],
+            "dialogue_level": []
+        };
+    }
+
+    function showNextDialoguePopup(currentDialogue, totalDialogues) {
+        return new Promise((resolve) => {
+            const popup = document.getElementById('popup');
+            const popupText = document.getElementById('popup-text');
+            const popupNextBtn = document.getElementById('popup-next-btn');
+            const closeButtonDialogueAspect = document.getElementById('popup-close-btn-dialogue-aspect');
+            const closeButtonNextDialogue = document.getElementById('popup-close-btn-next-dialogue');
+
+            popupText.innerHTML = `Let's move to the next dialogue. You have finished ${currentDialogue}/${totalDialogues} dialogues.`;
+            popup.style.display = 'block';
+            popupNextBtn.style.display = 'none';
+            closeButtonDialogueAspect.style.display = 'none';
+            closeButtonNextDialogue.style.display = 'inline-block';
+
+            closeButtonNextDialogue.onclick = () => {
+                popup.style.display = 'none';
+                resolve();
+            };
+        });
+    }
+
+    function saveAnnotationData() {
+        const currentDialogue = dialoguesData[currentIndex];
+        const dateAndTime = new Date().toISOString();
+        const data = {
+            conversation: currentDialogue,
+            annotations: annotationResults,
+            time: dateAndTime,
+            conversation_id: currentDialogue.conversation_id
+        };
+
+        const jsonString = JSON.stringify(data, null, 2);
+
+        // Use fetch to send data to server for saving
+        fetch('/save_annotation', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({data: jsonString}),
+        })
+        .then(response => response.json())
+        .then(data => {
+            log('Annotation saved successfully');
+        })
+        .catch((error) => {
+            console.error('Error saving annotation:', error);
+        });
+    }
+
+    async function moveToNextDialogue() {
+        saveAnnotationData();
+
+        dialoguesCompleted++;
+
+        if (dialoguesCompleted >= numDialoguesPerWorker) {
+            showCompletionPage();
+        } else {
+            await showNextDialoguePopup(dialoguesCompleted, numDialoguesPerWorker);
+
+            fetch(`/get_next_dialogue?annotator_id=${annotationResults["annotator_prolific_id"]}`)
+                .then(response => response.json())
+                .then(data => {
+                    dialoguesData = [data]; // Replace with the new dialogue
+                    currentIndex = 0;
+                    currentTurn = 0;
+                    currentAssistantTurnIndex = -1;
+                    currentAspectIndex = 0;
+                    currentDialogueAspectIndex = 0;
+                    totalTurnsInCurrentDialogue = data.turns.length;
+                    resetAnswers();
+                    displayDialogue(currentIndex, 1);
+                })
+                .catch(error => {
+                    console.error('Error fetching next dialogue:', error);
+                });
+        }
+    }
+
+    async function showCompletionPage() {
+        try {
+            const response = await fetch('/static/html/completion.html');
+            const html = await response.text();
+            const completionContainer = document.getElementById('completion-container');
+            completionContainer.innerHTML = html;
+            completionContainer.style.display = 'block';
+
+            // Hide other elements
+            document.querySelector('.container').style.display = 'none';
+            document.querySelector('.controls').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+        } catch (error) {
+            console.error('Error loading completion page:', error);
+        }
+    }
+
+    window.addEventListener('message', function(event) {
+        if (event.data.type === 'agreedAndProceed') {
+            document.getElementById('intro-frame').style.display = 'none';
+            document.getElementById('loading-overlay').style.display = 'none';
+            annotationResults["annotator_prolific_id"] = event.data.prolificId;
+            console.log('annotationResults', annotationResults);
+            
+            // Check Prolific ID and show controls if it's "testmode"
+            console.log("event.data.prolificId", event.data.prolificId);
+            if (event.data.prolificId === "testmode") {
+                document.querySelector('.controls').style.display = 'block';
+            }
+            
+            const annotatorId = annotationResults["annotator_prolific_id"];
+            fetch(`/get_next_dialogue?annotator_id=${annotatorId}`)
+                .then(response => response.json())
+                .then(data => {
+                    dialoguesData = [data]; // Store only the single dialogue
+                    totalTurnsInCurrentDialogue = data.turns.length;
+                    // Start the dialogue display
+                    displayDialogue(currentIndex, 1);
+                })
+                .catch(error => {
+                    console.error('Error fetching dialogue:', error);
+                });
+        } else {
+            log(`Unexpected message type: ${event.data.type}`);
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('next-turn-btn').addEventListener('click', moveToNextTurn);
+        document.getElementById('next-dialogue-btn').addEventListener('click', moveToNextDialogue);
+
+        document.getElementById('popup-next-btn').addEventListener('click', function() {
+            currentPopupLine++;
+            if (currentPopupLine < popupLines.length) {
+                document.getElementById('popup-text').innerHTML = popupLines[currentPopupLine];
+                
+                if (currentPopupLine === popupLines.length - 1) {
+                    document.getElementById('popup-next-btn').style.display = 'none';
+                    document.getElementById('popup-close-btn-dialogue-aspect').style.display = 'inline-block';
+                    document.getElementById('popup-close-btn-next-dialogue').style.display = 'none';
+                }
+            }
+        });
+
+        document.getElementById('popup-close-btn-dialogue-aspect').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+            currentPopupLine = 0;
+            startDialogueLevelQuestions();
+        });
+
+        document.getElementById('popup-close-btn-next-dialogue').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+            updateQuestionWindow(false);
+        });
+
+        // Initialize feedback window with "No question"
+        updateQuestionWindow(false);
+
+        // Show the intro frame once it's loaded
+        document.getElementById('intro-frame').onload = function() {
+            this.style.display = 'block';
+        };
+    });
+
+    async function moveToNextTurn() {
+        currentTurn++;
+        if (currentTurn >= totalTurnsInCurrentDialogue) {
+            currentTurn = totalTurnsInCurrentDialogue - 1;
+            await displayDialogue(currentIndex, currentTurn + 1);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+        } else {
+            await displayDialogue(currentIndex, currentTurn + 1);
+        }
+    }
+
+    </script>
+</body>
+</html>
