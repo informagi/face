@@ -10,11 +10,11 @@
 This is the repo for the paper: **[FACE: A Fine-Grained Reference-Free Evaluator for Conversational Information Access](https://arxiv.org/abs/2506.00314)**, Hideaki Joko, Faegheh Hasibi, SIGIR 2026.
 
 Specifically, the repository contains:  
-- The [**`CRSArena-Eval dataset`**](dataset/) with human-annotated conversations and meta-evaluation scripts.
-- The [**`CRSArena-Eval annotation interface`**](annotation_interface/) used to collect human judgments.
-- The [**`CRSArena-Eval meta-evaluation interface`**](interface/) for interactive meta-evaluation of your evaluator vs. baselines.
-- The [**`Evaluation aspect survey`**](https://informagus.nl/face/survey/) compares conversational-system evaluation aspects across the literature.
-- The [**`FACE`**](face/) implementation with particle generation and scoring tools.
+- [**`CRSArena-Eval dataset`**](dataset/) with human-annotated conversations and meta-evaluation scripts.
+- [**`CRSArena-Eval annotation interface`**](annotation_interface/) used to collect human judgments.
+- [**`CRSArena-Eval meta-evaluation interface`**](interface/) for interactive meta-evaluation of your evaluator vs. baselines.
+- [**`Evaluation aspect survey`**](https://informagus.nl/face/survey/) compares conversational-system evaluation aspects across the literature.
+- [**`FACE`**](face/) implementation with particle generation and scoring tools.
 
 ## What is CRSArena-Eval and FACE?
 
