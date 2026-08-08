@@ -18,4 +18,4 @@ For run file format, see: [`dataset/run/README.md`](../dataset/run/README.md)
 
 ## Demo
 
-![CRSArena-Eval demo](../demo/demo.gif)
+![CRSArena-Eval demo](../demo/demo.webp)

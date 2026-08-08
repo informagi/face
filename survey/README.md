@@ -2,7 +2,7 @@
 
 This survey compares conversational-system evaluation aspects across the literature.
 
-![Evaluation Aspect Survey demo](demo/evaluation-aspect-survey.gif)
+![Evaluation Aspect Survey demo](demo/evaluation-aspect-survey.webp)
 
 The public survey is hosted at
 [`https://informagus.nl/face/survey/`](https://informagus.nl/face/survey/).

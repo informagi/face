@@ -97,7 +97,7 @@ The public interface is hosted at
 [`https://informagi.github.io/face/interface/`](https://informagi.github.io/face/interface/).
 See [`interface/README.md`](interface/README.md) for detailed instructions on how to run the interface locally.
 
-![CRSArena-Eval demo](./demo/demo.gif)
+![CRSArena-Eval demo](./demo/demo.webp)
 
 We also provide a python script to evaluate your evaluator on the CRSArena-Eval dataset.
 
@@ -107,7 +107,7 @@ We also provide a python script to evaluate your evaluator on the CRSArena-Eval 
 
 The **CRSArena-Eval Annotation Interface** is a browser-based tool for collecting human judgments of conversational systems. It supports custom CRSArena-Dial conversations, a hidden quality-control dialogue with gold annotations, dialogue allocation across workers, and annotation progress logging.
 
-![CRSArena-Eval Annotation Interface demo](./annotation_interface/demo/annotation-interface.gif)
+![CRSArena-Eval Annotation Interface demo](./annotation_interface/demo/annotation-interface.webp)
 
 To run the interface locally:
 
@@ -123,7 +123,7 @@ Then open [`http://localhost:5050/instructions.html`](http://localhost:5050/inst
 Browse the survey at
 [`https://informagus.nl/face/survey/`](https://informagus.nl/face/survey/).
 
-![Evaluation Aspect Survey demo](./survey/demo/evaluation-aspect-survey.gif)
+![Evaluation Aspect Survey demo](./survey/demo/evaluation-aspect-survey.webp)
 
 ## Citation
 
