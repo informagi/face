@@ -90,7 +90,7 @@ The [`face/`](face/) directory contains the implementation of the FACE evaluatio
 👉 For detailed usage, LLM setup, and available aspects, see [`face/README.md`](face/README.md).  
 👉 For notation, particles, and scoring clarifications, see [`docs/faq.md`](docs/faq.md).
 
-## CRSArena-Eval Interactive Meta-Evaluation Interface (`meta_eval_interface/`)
+## CRSArena-Eval Meta-Evaluation Interface (`meta_eval_interface/`)
 
 We provide an easy-to-use meta-evaluation interface to evaluate your evaluator against the CRSArena-Eval dataset.
 The public interface is hosted at
