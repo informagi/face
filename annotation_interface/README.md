@@ -2,6 +2,8 @@
 
 The **CRSArena-Eval annotation interface** is a browser-based tool for collecting human judgments of conversational systems.
 
+![CRSArena-Eval Annotation Interface demo](demo/annotation-interface.gif)
+
 ## Directories
 
 **Directories *directly* related to running the CRSArena-Eval annotation interface:**
